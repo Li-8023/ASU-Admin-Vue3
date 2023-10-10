@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "../components/HomePage.vue";
 import Student from "../components/StudentPageContent.vue";
 import Sponsor from "../components/SponsorPageContent.vue";
+import SponsorForm from "../components/SponsorFormContent.vue"
 
 const routes = [
   {
@@ -18,6 +19,11 @@ const routes = [
     path:"/sponsor",
     name:"Sponsor",
     component: Sponsor,
+  },
+  {
+    path:"/sponsorForm",
+    name:"SponsorForm",
+    component: SponsorForm,
   }
 ];
 const router = createRouter({
