@@ -49,7 +49,10 @@
   content: "";
   flex: 1 1 auto;
 }
-
+.el-menu-item:hover {
+ 
+  transform: scale(1.1);
+}
 .flex-grow {
   flex-grow: 50;
 }

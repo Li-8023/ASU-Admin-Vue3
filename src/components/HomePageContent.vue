@@ -34,7 +34,7 @@
             FOR STUDENTS
           </router-link>
           <br />
-          <br/>
+          <br />
           <div class="sub-text">
             Learn about the class and maybe propose a project of your own!
           </div>
@@ -44,7 +44,7 @@
             FOR SPONSORS
           </router-link>
           <br />
-          <br/>
+          <br />
           <div class="sub-text">
             Find out more about the program and propose a project to start
             working with students.
@@ -54,7 +54,7 @@
       <div class="link-container">
         <router-link to="/" class="link-format"> HOST A SEMINAR </router-link>
         <br />
-        <br/>
+        <br />
         <div class="sub-text">
           Share your knowledge and advice with students that are about to
           graduate!
@@ -63,7 +63,7 @@
     </div>
     <div class="home-info">
       If you have questions or would like more information, please contact
-      sdosburn@asu.edu
+      <strong><a href="mailto:sdosburn@asu.edu">sdosburn@asu.edu</a></strong>
     </div>
   </div>
 </template>
@@ -94,6 +94,9 @@ export default {};
 .home-description {
   margin-top: 1rem;
   margin-bottom: 1rem;
+  line-height: 1.6;
+  word-wrap: break-word;
+  padding: 0 20px; /* Adjust as needed */
 }
 
 .home-body {
