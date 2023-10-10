@@ -5,10 +5,11 @@
         :default-active="activeIndex"
         class="el-menu-demo"
         mode="horizontal"
+        :ellipsis="false"
         @select="handleSelect"
       >
         <router-link to="/">
-          <el-menu-item  index="1">Home</el-menu-item>
+          <el-menu-item index="1">Home</el-menu-item>
         </router-link>
         <router-link to="/student">
           <el-menu-item index="2">Students</el-menu-item>
@@ -17,6 +18,7 @@
           <el-menu-item index="3">Sponsors</el-menu-item>
         </router-link>
         <el-menu-item index="4">Seminars</el-menu-item>
+        <div class="flex-grow" />
         <el-menu-item>
           <img src="../assets/asu_fulton_logo.png" class="navigation-image" />
         </el-menu-item>
@@ -46,5 +48,9 @@
 .el-menu-demo::before {
   content: "";
   flex: 1 1 auto;
+}
+
+.flex-grow {
+  flex-grow: 50;
 }
 </style>

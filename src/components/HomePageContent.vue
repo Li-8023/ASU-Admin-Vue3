@@ -29,18 +29,41 @@
     </div>
     <div class="home-body">
       <div class="top-links">
-        <router-link to="/student">
+        <div class="link-container">
+          <router-link to="/student" class="link-format">
             FOR STUDENTS
-        </router-link>
-        <router-link to="/sponsor">
+          </router-link>
+          <br />
+          <br/>
+          <div class="sub-text">
+            Learn about the class and maybe propose a project of your own!
+          </div>
+        </div>
+        <div class="link-container">
+          <router-link to="/sponsor" class="link-format">
             FOR SPONSORS
-        </router-link>
-        <!-- <a href="#" class="link">Link 1</a>
-        <a href="#" class="link">Link 2</a> -->
+          </router-link>
+          <br />
+          <br/>
+          <div class="sub-text">
+            Find out more about the program and propose a project to start
+            working with students.
+          </div>
+        </div>
       </div>
-      <router-link to="/">
-        HOST A SEMINAR
-      </router-link>
+      <div class="link-container">
+        <router-link to="/" class="link-format"> HOST A SEMINAR </router-link>
+        <br />
+        <br/>
+        <div class="sub-text">
+          Share your knowledge and advice with students that are about to
+          graduate!
+        </div>
+      </div>
+    </div>
+    <div class="home-info">
+      If you have questions or would like more information, please contact
+      sdosburn@asu.edu
     </div>
   </div>
 </template>
@@ -50,6 +73,8 @@ export default {};
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap");
+@import url("https://fonts.google.com/specimen/Tilt+Neon?icon.style=Outlined");
 .el-carousel__item h3 {
   color: #475669;
   opacity: 0.75;
@@ -74,7 +99,7 @@ export default {};
 .home-body {
   background-color: rgb(255, 198, 39);
   display: flex;
-  height:10rem;
+  height: 20rem;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
@@ -83,11 +108,36 @@ export default {};
 
 .top-links {
   display: flex;
-  gap: 1rem;
+  gap: 20rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 .link {
   color: white;
   text-decoration: none;
+}
+
+.link-format {
+  font-family: "Noto Serif", serif;
+  font-size: 35px;
+  color: black;
+  font-weight: bold;
+}
+
+.sub-text {
+  font-size: 15px;
+}
+
+.link-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-info {
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  font-family: "Tilt Neon", cursive;
 }
 </style>
