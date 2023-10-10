@@ -10,8 +10,10 @@
         <el-menu-item index="1">Home</el-menu-item>
         <el-menu-item index="2">Students</el-menu-item>
         <el-menu-item index="3">Sponsors</el-menu-item>
-        <el-menu-item index="2">Seminars</el-menu-item>
-        <img src="../assets/asu_fulton_logo.png" class="navigation-image" />
+        <el-menu-item index="4">Seminars</el-menu-item>
+        <el-menu-item class="right-menu-item">
+          <img src="../assets/asu_fulton_logo.png" class="navigation-image" />
+        </el-menu-item>
       </el-menu>
     </div>
   </div>
@@ -19,16 +21,21 @@
 
 <script></script>
 
-<style>
-.landing-page {
-}
+<style scoped>
 
+.landing-page{
+    margin-top:-4rem;
+}
 .navigation {
-  margin-top: -3rem;
+  height: 60px; /* Adjust this to your preferred height */
 }
 
 .navigation-image {
-  width: 100%;
-  display: block;
+  height: 100%;
+  width: 200px;
+}
+
+.right-menu-item{
+    margin-left: auto;
 }
 </style>
