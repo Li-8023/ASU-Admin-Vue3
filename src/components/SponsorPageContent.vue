@@ -13,10 +13,10 @@
       </div>
     </div>
     <div class="Sponsor-links">
-      <router-link to="/student" class="sponsor-link-format">
+      <router-link to="/sponsorform" class="sponsor-link-format">
         Already Have a Team!
       </router-link>
-      <router-link to="/student" class="sponsor-link-format">
+      <router-link to="/sponsorform" class="sponsor-link-format">
         Don't Have a Team!
       </router-link>
     </div>
