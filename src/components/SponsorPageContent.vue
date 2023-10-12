@@ -282,8 +282,17 @@ import LandingPage from "../components/LandingPage.vue";
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: white; /* Change text color as needed */
-  font-size: 5em; /* Change font size as needed */
+  color: white; 
+  font-size: 5em; 
+}
+
+.centered-text::after {
+  content: "";
+  position: absolute;
+  bottom: -10px; 
+  left: -10%; 
+  right: -10%;
+  border-bottom: 10px solid gold;
 }
 
 .Sponsor-links {
@@ -299,6 +308,12 @@ import LandingPage from "../components/LandingPage.vue";
   color: black;
   font-weight: bold;
 }
+
+
+.sponsor-link-format:hover {
+  color: maroon; /* Change text color to maroon when hovering */
+}
+
 .Sponsor-content {
   justify-content: left;
   margin-top: 3rem;

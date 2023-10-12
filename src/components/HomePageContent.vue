@@ -128,6 +128,9 @@ export default {};
   font-weight: bold;
 }
 
+.link-format:hover{
+  color:maroon;
+}
 .sub-text {
   font-size: 15px;
 }

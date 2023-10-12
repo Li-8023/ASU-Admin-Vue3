@@ -52,6 +52,8 @@
 .el-menu-item:hover {
  
   transform: scale(1.1);
+  color: maroon !important;
+  font-weight: bold !important;
 }
 .flex-grow {
   flex-grow: 50;

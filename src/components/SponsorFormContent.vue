@@ -9,7 +9,7 @@
           src="../assets/group-of-students-looking-at-computer-monitor.jpg"
           class="sponsor-content-background"
         />
-        <div class="centered-text">PROPOSE A PROJECT</div>
+        <div class="centered-text-sponsor">PROPOSE A PROJECT</div>
       </div>
     </div>
     <div class="Sponsor-content">
@@ -378,7 +378,7 @@ const organization = "";
   width: 600px;
 }
 
-.centered-text {
+.centered-text-sponsor {
   font-weight: bold;
   font-family: "Noto Serif", serif;
   position: absolute;
@@ -387,6 +387,15 @@ const organization = "";
   transform: translate(-50%, -50%);
   color: black; /* Change text color as needed */
   font-size: 3em; /* Change font size as needed */
+}
+
+.centered-text-sponsor::after {
+  content: "";
+  position: absolute;
+  bottom: -10px; /* Adjust the distance between text and underline as needed */
+  left: -10%; /* Extend to the left */
+  right: -10%; /* Extend to the right */
+  border-bottom: 10px solid gold; /* You can adjust the color and style as needed */
 }
 
 .underline-input input {
