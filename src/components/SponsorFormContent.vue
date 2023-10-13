@@ -39,7 +39,9 @@
           <el-divider border-style="double" />
           <div class="additional-info">
             <p>Email: <strong>example@example.com</strong></p>
-            <el-button type="text" @click="switchAccount">Switch Account</el-button>
+            <el-button type="text" @click="switchAccount"
+              >Switch Account</el-button
+            >
           </div>
         </el-card>
       </div>
@@ -138,7 +140,7 @@
               <el-checkbox v-model="checked9" label="other" size="large" />
               <el-input
                 v-model="otherInput"
-                placeholder="Other (please specify)"
+                placeholder=""
                 class="input-with-space"
               />
             </div>
@@ -256,32 +258,354 @@
       <div class="box-card-container" style="margin-top: 20px">
         <el-card class="box-card">
           <div class="card-paragraph">
-            <div class="left-paragraph">
-              test here
-            </div>
+            <div class="left-paragraph">Proposer Name:</div>
           </div>
           <div class="underline-input">
-            <input placeholder="Enter text"/>
+            <input placeholder="Your answer" />
           </div>
         </el-card>
       </div>
+
+      <div class="box-card-container" style="margin-top: 20px">
+        <el-card class="box-card">
+          <div class="card-paragraph">
+            <div class="left-paragraph">Proposer Email Address:</div>
+          </div>
+          <div class="underline-input">
+            <input placeholder="Your answer" />
+          </div>
+        </el-card>
+      </div>
+
+      <div class="box-card-container" style="margin-top: 20px">
+        <el-card class="box-card">
+          <div class="card-paragraph">
+            <div class="left-paragraph">
+              Project Contact Name (if different from proposer):
+            </div>
+          </div>
+          <div class="underline-input">
+            <input placeholder="Your answer" />
+          </div>
+        </el-card>
+      </div>
+
+      <div class="box-card-container" style="margin-top: 20px">
+        <el-card class="box-card">
+          <div class="card-paragraph">
+            <div class="left-paragraph">
+              Project Contact Email (if different from proposer):
+            </div>
+          </div>
+          <div class="underline-input">
+            <input placeholder="Your answer" />
+          </div>
+        </el-card>
+      </div>
+
+      <div class="box-card-container" style="margin-top: 20px">
+        <el-card class="box-card">
+          <div class="card-paragraph">
+            <div class="inline-header" style="font-size: 1em">
+              Project Description
+            </div>
+            <div class="left-paragraph">
+              Please give a short title to identify the project, and provide a
+              description which would provide the proposal reviewers and the
+              students enough detail to understand the problem to be solved and
+              the challenges of the project.
+            </div>
+            <div class="left-paragraph">
+              Describe the student learning experience. Provide insight into
+              what the students would learn by working on this project. Also
+              provide a description of the expected frequency of meetings,
+              meeting modalities/locations, and level of sponsor involvement in
+              the project.
+            </div>
+            <div class="left-paragraph">
+              Detail the project deliverables. Provide a list of what artifacts
+              the students must deliver by the end of the two semester sequence.
+            </div>
+            <div class="left-paragraph">
+              Describe desired background. Describe the expected knowledge of
+              specific programming languages, operating systems, or technologies
+              for the project. Also, is the project strictly software-based or
+              will the students need to have an understanding embedded systems
+              or other hardware knowledge?
+            </div>
+          </div>
+        </el-card>
+      </div>
+
+      <div class="box-card-container" style="margin-top: 20px">
+        <el-card class="box-card">
+          <div class="card-paragraph">
+            <div class="left-paragraph">Project Title:</div>
+          </div>
+          <div class="underline-input">
+            <input placeholder="Your answer" />
+          </div>
+        </el-card>
+      </div>
+
+      <div class="box-card-container" style="margin-top: 20px">
+        <el-card class="box-card">
+          <div class="card-paragraph">
+            <div class="left-paragraph">Project Description:</div>
+          </div>
+          <div class="underline-input">
+            <input placeholder="Your answer" />
+          </div>
+        </el-card>
+      </div>
+
+      <div class="box-card-container" style="margin-top: 20px">
+        <el-card class="box-card">
+          <div class="card-paragraph">
+            <div class="left-paragraph">Student Learning Experience:</div>
+          </div>
+          <div class="underline-input">
+            <input placeholder="Your answer" />
+          </div>
+        </el-card>
+      </div>
+
+      <div class="box-card-container" style="margin-top: 20px">
+        <el-card class="box-card">
+          <div class="card-paragraph">
+            <div class="left-paragraph">Expected Deliverables:</div>
+          </div>
+          <div class="underline-input">
+            <input placeholder="Your answer" />
+          </div>
+        </el-card>
+      </div>
+
+      <div class="box-card-container" style="margin-top: 20px">
+        <el-card class="box-card">
+          <div class="card-paragraph">
+            <div class="left-paragraph">Desired Background:</div>
+          </div>
+          <div class="underline-input">
+            <input placeholder="Your answer" />
+          </div>
+        </el-card>
+      </div>
+
+      <div class="box-card-container" style="margin-top: 20px">
+        <el-card class="box-card">
+          <div class="card-paragraph">
+            <div class="left-paragraph">Project Focus:</div>
+          </div>
+          <div class="checkbox-group">
+            <div>
+              <el-checkbox
+                v-model="checked18"
+                label="Significant Software Development (for CS students)"
+                size="large"
+              />
+            </div>
+            <div>
+              <el-checkbox
+                v-model="checked19"
+                label="Significant Hardware / Embedded Software Development (for CSE Students)"
+                size="large"
+              />
+            </div>
+            <div>
+              <el-checkbox
+                v-model="checked20"
+                label="Both Significant Software and Embedded Systems Development"
+                size="large"
+              />
+            </div>
+            <div>
+              <el-checkbox
+                v-model="checked21"
+                label="Interdisciplinary project that may work with majors outside of CS and CSE"
+                size="large"
+              />
+            </div>
+          </div>
+        </el-card>
+      </div>
+
+      <div class="box-card-container" style="margin-top: 20px">
+    <el-card class="box-card">
+      <div class="card-paragraph">
+        Maximum Team Size:
+        <el-select v-model="selectedTeamSize" placeholder="Choose" @change="updateTeamSize">
+          <el-option label="2" value="2" />
+          <el-option label="3" value="3" />
+          <el-option label="4" value="4" />
+          <el-option label="5" value="5" />
+        </el-select>
+      </div>
+    </el-card>
+  </div>
+
+  <div class="box-card-container" style="margin-top: 20px">
+        <el-card class="box-card">
+          <div class="card-paragraph">
+            <div class="inline-header" style="font-size: 1em">
+              Required Agreements
+            </div>
+            <div class="left-paragraph">
+              Please note any non-disclosure agreement and/or intellectual 
+              property agreement that the students would be required to sign, 
+              or any US Citizenship requirements. Any agreements must be provided by the proposer.
+            </div>
+          
+          </div>
+        </el-card>
+      </div>
+
+      <div class="box-card-container" style="margin-top: 20px">
+        <el-card class="box-card">
+          <div class="card-paragraph">
+            <div class="left-paragraph">Project Focus:</div>
+          </div>
+          <div class="checkbox-group">
+            <div>
+              <el-checkbox
+                v-model="checked22"
+                label="Non-Disclosure Agreement"
+                size="large"
+              />
+            </div>
+            <div>
+              <el-checkbox
+                v-model="checked23"
+                label="Intellectual Property Agreement"
+                size="large"
+              />
+            </div>
+            <div>
+              <el-checkbox
+                v-model="checked24"
+                label="Ability to Obtain US Security Clearance"
+                size="large"
+              />
+            </div>
+            <div>
+              <el-checkbox
+                v-model="checked25"
+                label="No Agreements are required."
+                size="large"
+              />
+            </div>
+
+            <div>
+              <el-checkbox
+                v-model="checked26"
+                label="US Citizenship Required"
+                size="large"
+              />
+            </div>
+            <div>
+              <el-checkbox
+              v-model="checked27" 
+              label="Other"
+              size="large"
+              />
+              <el-input
+                v-model="otherInput"
+                placeholder=""
+                class="input-with-space"
+              />
+            </div>
+          </div>
+        </el-card>
+      </div>
+
+      <div class="box-card-container" style="margin-top: 20px">
+        <el-card class="box-card">
+          <div class="card-paragraph">
+            <div class="inline-header" style="font-size: 1em">
+              Project Description
+            </div>
+            <div class="left-paragraph">
+              Feel free to include any other information or support material 
+              that will provide insight into the project for the proposal reviewers 
+              and students.  The more information you can provide the students to help 
+              them understand the problem and be motivated to work on the project, 
+              the more likely your project will be selected by the students.
+            </div>
+            </div>
+            </el-card>
+            </div>
+
+            <div class="box-card-container" style="margin-top: 20px">
+        <el-card class="box-card">
+          <div class="card-paragraph">
+            <div class="left-paragraph">Please inlcude links to any additional materials 
+              (presentations, additional documentation, etc) that you would like the students to view.</div>
+          </div>
+          <div class="underline-input">
+            <input placeholder="Your answer" />
+          </div>
+        </el-card>
+      </div>
+
     </div>
   </div>
 </template>
 
+
+
 <script>
-export default {
+// export default {
+//   data() {
+//     return {
+//       organization: "",
+//       checked: false,
+//     };
+//   },
+//   methods: {
+//     switchAccount() {
+//       window.open(
+//         "https://accounts.google.com/AccountChooser/signinchooser?continue=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLSeXiCKRfBdKgLI0JTBdKE09PHWIVIh8p9suybNX1LdyZD8plg%2Fviewform%3Fembedded%3Dtrue&service=wise&theme=glif&flowName=GlifWebSignIn&flowEntry=AccountChooser",
+//         "_blank"
+//       );
+//     },
+//   },
+// };
+export const Component1 = {
   data() {
     return {
       organization: "",
       checked: false,
     };
   },
-  methods:{
-    switchAccount(){
-      window.open('https://accounts.google.com/AccountChooser/signinchooser?continue=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLSeXiCKRfBdKgLI0JTBdKE09PHWIVIh8p9suybNX1LdyZD8plg%2Fviewform%3Fembedded%3Dtrue&service=wise&theme=glif&flowName=GlifWebSignIn&flowEntry=AccountChooser', '_blank');
-    }
-  }
+  methods: {
+    switchAccount() {
+      window.open(
+        "https://accounts.google.com/AccountChooser/signinchooser?continue=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2F...",
+        "_blank"
+      );
+    },
+  },
+};
+
+// Export the second component
+export const Component2 = {
+  data() {
+    return {
+      selectedTeamSize: null,
+    };
+  },
+  methods: {
+    updateTeamSize() {
+      // You can access the selected value with this.selectedTeamSize
+      console.log('Selected Team Size:', this.selectedTeamSize);
+    },
+    switchAccount() {
+      window.open(
+        "https://accounts.google.com/AccountChooser/signinchooser?continue=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2F...",
+        "_blank"
+      );
+    },
+  },
 };
 </script>
 
@@ -310,7 +634,6 @@ const organization = "";
   padding: 0 20px;
   margin-top: 1rem;
 }
-
 
 .additional-info {
   display: flex;
@@ -400,7 +723,7 @@ const organization = "";
 
 .underline-input input {
   border: none;
-  border-bottom: 2px solid black;
+  border-bottom: 0.5px solid black;
   outline: none;
   width: 100%;
 }
