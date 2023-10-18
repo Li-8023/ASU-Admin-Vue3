@@ -297,7 +297,7 @@
         </el-card>
       </div>
     </div>
-
+<!--  -->
     <div class="button" style="margin-top: 20px; display: flex; justify-content: flex-end; width: 925px;">
         <el-button :color="bg" plain>Submit</el-button>
     </div>
