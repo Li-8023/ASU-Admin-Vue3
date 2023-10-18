@@ -554,23 +554,7 @@
 
 
 <script>
-// export default {
-//   data() {
-//     return {
-//       organization: "",
-//       checked: false,
-//     };
-//   },
-//   methods: {
-//     switchAccount() {
-//       window.open(
-//         "https://accounts.google.com/AccountChooser/signinchooser?continue=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLSeXiCKRfBdKgLI0JTBdKE09PHWIVIh8p9suybNX1LdyZD8plg%2Fviewform%3Fembedded%3Dtrue&service=wise&theme=glif&flowName=GlifWebSignIn&flowEntry=AccountChooser",
-//         "_blank"
-//       );
-//     },
-//   },
-// };
-export const Component1 = {
+export default {
   data() {
     return {
       organization: "",
@@ -580,33 +564,49 @@ export const Component1 = {
   methods: {
     switchAccount() {
       window.open(
-        "https://accounts.google.com/AccountChooser/signinchooser?continue=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2F...",
+        "https://accounts.google.com/AccountChooser/signinchooser?continue=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLSeXiCKRfBdKgLI0JTBdKE09PHWIVIh8p9suybNX1LdyZD8plg%2Fviewform%3Fembedded%3Dtrue&service=wise&theme=glif&flowName=GlifWebSignIn&flowEntry=AccountChooser",
         "_blank"
       );
     },
   },
 };
+// export const Component1 = {
+//   data() {
+//     return {
+//       organization: "",
+//       checked: false,
+//     };
+//   },
+//   methods: {
+//     switchAccount() {
+//       window.open(
+//         "https://accounts.google.com/AccountChooser/signinchooser?continue=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2F...",
+//         "_blank"
+//       );
+//     },
+//   },
+// };
 
-// Export the second component
-export const Component2 = {
-  data() {
-    return {
-      selectedTeamSize: null,
-    };
-  },
-  methods: {
-    updateTeamSize() {
-      // You can access the selected value with this.selectedTeamSize
-      console.log('Selected Team Size:', this.selectedTeamSize);
-    },
-    switchAccount() {
-      window.open(
-        "https://accounts.google.com/AccountChooser/signinchooser?continue=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2F...",
-        "_blank"
-      );
-    },
-  },
-};
+// // Export the second component
+// export const Component2 = {
+//   data() {
+//     return {
+//       selectedTeamSize: null,
+//     };
+//   },
+//   methods: {
+//     updateTeamSize() {
+//       // You can access the selected value with this.selectedTeamSize
+//       console.log('Selected Team Size:', this.selectedTeamSize);
+//     },
+//     switchAccount() {
+//       window.open(
+//         "https://accounts.google.com/AccountChooser/signinchooser?continue=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2F...",
+//         "_blank"
+//       );
+//     },
+//   },
+// };
 </script>
 
 <script setup>
