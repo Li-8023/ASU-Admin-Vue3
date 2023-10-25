@@ -2,8 +2,8 @@
   <div class="home-page">
     <div class="home-image">
       <el-carousel height="200px" class="demonstration">
-        <el-carousel-item v-for="item in 4" :key="item">
-          <h3 class="small justify-center" text="2xl">{{ item }}</h3>
+        <el-carousel-item v-for="(image, index) in images" :key="index">
+          <img :src="image.url" :alt="image.alt" class="carousel-image" />
         </el-carousel-item>
       </el-carousel>
     </div>
@@ -69,7 +69,23 @@
 </template>
 
 <script>
-export default {};
+import { ElCarousel, ElCarouselItem } from "element-plus";
+
+export default {
+  components: {
+    ElCarousel,
+    ElCarouselItem,
+  },
+  data() {
+    return {
+      images: [
+        { url: require("@/assets/LandingImage3.jpg"), alt: "Image 1" },
+        { url: require("@/assets/LandingImage2.jpg"), alt: "Image 2" },
+        { url: require("@/assets/Student_background.jpg"), alt: "Image 3" },
+      ],
+    };
+  },
+};
 </script>
 
 <style>
@@ -128,8 +144,8 @@ export default {};
   font-weight: bold;
 }
 
-.link-format:hover{
-  color:maroon;
+.link-format:hover {
+  color: maroon;
 }
 .sub-text {
   font-size: 15px;
@@ -145,5 +161,10 @@ export default {};
   margin-top: 2rem;
   margin-bottom: 4rem;
   font-family: "Tilt Neon", cursive;
+}
+.carousel-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
 }
 </style>
