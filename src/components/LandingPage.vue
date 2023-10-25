@@ -17,7 +17,9 @@
         <router-link to="/sponsor">
           <el-menu-item index="3">Sponsors</el-menu-item>
         </router-link>
-        <el-menu-item index="4">Seminars</el-menu-item>
+        <router-link to="/Seminars">
+          <el-menu-item index="4">Seminars</el-menu-item>
+        </router-link>
         <div class="flex-grow" />
         <el-menu-item>
           <img src="../assets/asu_fulton_logo.png" class="navigation-image" />
@@ -50,7 +52,6 @@
   flex: 1 1 auto;
 }
 .el-menu-item:hover {
- 
   transform: scale(1.1);
   color: maroon !important;
   font-weight: bold !important;

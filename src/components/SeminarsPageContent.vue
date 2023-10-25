@@ -74,7 +74,7 @@ import LandingPage from "../components/LandingPage.vue";
 }
 .seminars-title {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 17px;
   text-align: left;
   margin-top: 2rem;
 }
