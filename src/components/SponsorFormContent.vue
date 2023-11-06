@@ -362,6 +362,17 @@
       <div class="box-card-container" style="margin-top: 20px">
         <el-card class="box-card">
           <div class="card-paragraph">
+            <div class="left-paragraph">Students who already in your team(divide by ;)</div>
+          </div>
+          <div class="underline-input">
+            <input placeholder="Your answer" />
+          </div>
+        </el-card>
+      </div>
+
+      <div class="box-card-container" style="margin-top: 20px">
+        <el-card class="box-card">
+          <div class="card-paragraph">
             <div class="left-paragraph">Student Learning Experience:</div>
           </div>
           <div class="underline-input">
