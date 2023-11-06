@@ -69,6 +69,8 @@
 
 <script setup>
 import LandingPage from "../components/LandingPage.vue";
+// eslint-disable-next-line no-unused-vars
+import Login from "../componets/Login.vue";
 </script>
 
 <style>

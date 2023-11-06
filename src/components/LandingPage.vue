@@ -12,6 +12,7 @@
           <el-menu-item index="1">Home</el-menu-item>
         </router-link>
         <router-link to="/student">
+          /* login component */
           <el-menu-item index="2">Students</el-menu-item>
         </router-link>
         <router-link to="/sponsor">
