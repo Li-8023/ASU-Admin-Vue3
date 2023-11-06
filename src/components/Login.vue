@@ -14,11 +14,11 @@
     // eslint-disable-next-line vue/multi-word-component-names
     name: 'Login',
   }
-  methods: {''
-    onClick() {
+  // methods: {''
+  //   // onClick() {
 
-    }
-  }
+  //   // }
+  // }
   </script>
   
   <style scoped>

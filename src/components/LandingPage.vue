@@ -8,11 +8,13 @@
         :ellipsis="false"
         @select="handleSelect"
       >
+        <el-menu-item>
+          <img src="../assets/asu_fulton_logo.png" class="navigation-image" />
+        </el-menu-item>
         <router-link to="/">
           <el-menu-item index="1">Home</el-menu-item>
         </router-link>
         <router-link to="/student">
-          /* login component */
           <el-menu-item index="2">Students</el-menu-item>
         </router-link>
         <router-link to="/sponsor">
@@ -21,16 +23,48 @@
         <router-link to="/Seminars">
           <el-menu-item index="4">Seminars</el-menu-item>
         </router-link>
+        <el-menu-item>
+          <el-input
+            v-model="searchQuery"
+            placeholder="Search..."
+            @keyup.enter="search"
+          >
+            <template #prepend>
+              <span class="material-symbols-outlined"> search </span>
+            </template>
+          </el-input>
+        </el-menu-item>
         <div class="flex-grow" />
         <el-menu-item>
-          <img src="../assets/asu_fulton_logo.png" class="navigation-image" />
+          <span class="material-symbols-outlined"> account_circle </span>
+          <span class="text">{{ this.username }}</span>
         </el-menu-item>
       </el-menu>
     </div>
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  data() {
+    return {
+      searchQuery: "",
+      activeIndex: "1",
+      username:'username',
+    };
+  },
+  methods: {
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    search() {
+      console.log("Searching for:", this.searchQuery);
+      // Here you would typically call a search API or search function
+      // For now, we just log the search query to the console
+    },
+  },
+};
+</script>
 
 <style scoped>
 .landing-page {
