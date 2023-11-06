@@ -53,7 +53,7 @@
         </div>
       </div>
       <div class="link-container">
-        <router-link to="/" class="link-format"> HOST A SEMINAR </router-link>
+        <router-link to="/Seminars" class="link-format"> HOST A SEMINAR </router-link>
         <br />
         <br />
         <div class="sub-text">
