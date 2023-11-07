@@ -36,13 +36,55 @@
         </el-menu-item>
         <div class="flex-grow" />
         <el-menu-item>
-          <span class="material-symbols-outlined"> account_circle </span>
-          <span class="text">{{ this.username }}</span>
+          <el-button text @click="centerDialogVisible = true">
+            <span class="material-symbols-outlined"> account_circle </span>
+            <span class="text">{{ this.username }}</span>
+          </el-button>
         </el-menu-item>
       </el-menu>
     </div>
+    <el-dialog
+      v-model="centerDialogVisible"
+      title="Sign In"
+      width="30%"
+      align-center
+    >
+      <div class="dialog-content">
+        <el-form-item label="ASURITE User ID:">
+          <el-input
+            v-model="id"
+            id="id"
+            type="text"
+            required
+            placeholder="Please input ASURITE"
+            style="margin-bottom: 10px"
+          />
+        </el-form-item>
+        <el-form-item label="Password:">
+          <el-input
+            v-model="password"
+            required
+            type="password"
+            placeholder="Please input password"
+            show-password
+          />
+        </el-form-item>
+      </div>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="centerDialogVisible = false">Cancel</el-button>
+          <el-button type="primary" @click="centerDialogVisible = false" class="dialog-signin-button">
+            Sign In
+          </el-button>
+        </span>
+      </template>
+    </el-dialog>
   </div>
 </template>
+
+<script setup>
+import { ref } from "vue";
+</script>
 
 <script>
 export default {
@@ -50,7 +92,10 @@ export default {
     return {
       searchQuery: "",
       activeIndex: "1",
-      username:'username',
+      username: "Login",
+      centerDialogVisible: ref(false),
+      password: ref(""),
+      id: ref(""),
     };
   },
   methods: {
@@ -59,14 +104,27 @@ export default {
     },
     search() {
       console.log("Searching for:", this.searchQuery);
-      // Here you would typically call a search API or search function
-      // For now, we just log the search query to the console
+      fetch(`https://search.asu.edu/search/?q=${encodeURIComponent(this.searchQuery)}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        // Here you can process the search results
+      })
+      .catch(err => console.error("Error searching:", err));
     },
   },
 };
 </script>
 
 <style scoped>
+.dialog-signin-button{
+  background-color: maroon !important;
+  border-color: maroon !important;
+}
+.dialog-footer button:first-child {
+  margin-right: 10px;
+}
+
 .landing-page {
   margin-top: -4rem;
 }
@@ -91,6 +149,8 @@ export default {
   color: maroon !important;
   font-weight: bold !important;
 }
+
+
 .flex-grow {
   flex-grow: 50;
 }

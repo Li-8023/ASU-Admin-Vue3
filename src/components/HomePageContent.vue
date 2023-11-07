@@ -30,7 +30,6 @@
     <div class="home-body">
       <div class="top-links">
         <div class="link-container">
-          /* login component */
           <router-link to="/student" class="link-format">
             FOR STUDENTS
           </router-link>
