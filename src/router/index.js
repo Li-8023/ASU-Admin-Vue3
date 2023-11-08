@@ -6,6 +6,7 @@ import Seminars from "../components/SeminarsPageContent.vue"
 import SponsorForm from "../components/SponsorFormContent.vue"
 import StudentForm from "../components/StudentFormContent.vue";
 import PickProject from "../components/PickProject.vue";
+import SponsorHaveTeam from "../components/SponsorHaveTeam.vue";
 
 const routes = [
   {
@@ -27,6 +28,11 @@ const routes = [
     path: "/sponsorForm",
     name: "SponsorForm",
     component: SponsorForm,
+  },
+  {
+    path:"/haveTeam",
+    name:"HaveTeam",
+    component:SponsorHaveTeam
   },
   {
     path:"/studentForm",

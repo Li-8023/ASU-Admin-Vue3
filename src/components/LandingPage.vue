@@ -65,7 +65,7 @@
             v-model="password"
             required
             type="password"
-            placeholder="Please input password"
+            placeholder="Please enter your ASUID as the password"
             show-password
           />
         </el-form-item>

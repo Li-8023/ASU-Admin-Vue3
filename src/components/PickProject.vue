@@ -39,8 +39,8 @@
                   :key="item.id"
                   class="userPool-item"
                 >
-                 <span class="item-tag">{{  index + 1 }}</span> 
-                 <span class="item-name">{{  item.name }}</span>
+                  <span class="item-tag">{{ index + 1 }}</span>
+                  <span class="item-name">{{ item.name }}</span>
                 </div>
               </vue-draggable-next>
             </div>
@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { ref, onMounted} from "vue";
+import { ref, onMounted } from "vue";
 import LandingPage from "../components/LandingPage.vue";
 import { VueDraggableNext } from "vue-draggable-next";
 import { ElMessage } from "element-plus";
@@ -63,27 +63,31 @@ export default {
     VueDraggableNext,
   },
   setup() {
-    
-
     const userPool = ref([]);
     const choicePool = ref([]);
 
-    const fetchProjects = async() => {
-      const response = await fetch('http://localhost:8080/projectsCsv');
+    const fetchProjects = async () => {
+      const response = await fetch("http://localhost:8080/allProjects");
       const data = await response.json();
 
-      data.entity.forEach(project => {
-        choicePool.value.push({ id: project.id, name: project.title});
-      });
+      console.log("data: " + JSON.stringify(data));
+
+      if (data) {
+        data.forEach((project) => {
+          choicePool.value.push({ id: project.id, name: project.title });
+        });
+      } else {
+        console.error("Data is undefined");
+      }
     };
 
     onMounted(fetchProjects);
 
     const handleChange = () => {
       // Check if the user pool has more than two items
-      if (userPool.value.length > 5) {
+      if (userPool.value.length > 10) {
         // Display an error message
-        ElMessage.error("You can only have up to two items in the user pool.");
+        ElMessage.error("You can only have up to ten items in the user pool.");
 
         // Move the last item added back to the choice pool
         const removedItem = userPool.value.pop();
@@ -107,8 +111,8 @@ export default {
   font-family: "Noto Serif", serif;
   color: black;
   font-size: 2em;
-  margin-bottom: 20px; 
-} 
+  margin-bottom: 20px;
+}
 .pools-container {
   display: flex;
   justify-content: space-between;
@@ -121,7 +125,6 @@ export default {
   width: 500px; /* Set the width to your desired value */
   max-height: 700px; /* Set the maximum height to control the scroll if needed */
   overflow-y: auto; /* Add vertical scroll if items exceed max-height */
-  
 }
 
 .choicePool-item,

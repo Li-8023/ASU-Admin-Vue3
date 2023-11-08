@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="Sponsor-links">
-      <router-link to="/sponsorform" class="sponsor-link-format">
+      <router-link to="/haveTeam" class="sponsor-link-format">
         Already Have a Team!
       </router-link>
       <router-link to="/sponsorform" class="sponsor-link-format">

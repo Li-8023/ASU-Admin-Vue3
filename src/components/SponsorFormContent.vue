@@ -343,7 +343,7 @@
             <div class="left-paragraph">Project Title:</div>
           </div>
           <div class="underline-input">
-            <input placeholder="Your answer" />
+            <input placeholder="Your answer" id="projectTitle"/>
           </div>
         </el-card>
       </div>
@@ -352,17 +352,6 @@
         <el-card class="box-card">
           <div class="card-paragraph">
             <div class="left-paragraph">Project Description:</div>
-          </div>
-          <div class="underline-input">
-            <input placeholder="Your answer" />
-          </div>
-        </el-card>
-      </div>
-
-      <div class="box-card-container" style="margin-top: 20px">
-        <el-card class="box-card">
-          <div class="card-paragraph">
-            <div class="left-paragraph">Students who already in your team(divide by ;)</div>
           </div>
           <div class="underline-input">
             <input placeholder="Your answer" />
@@ -442,31 +431,35 @@
       </div>
 
       <div class="box-card-container" style="margin-top: 20px">
-    <el-card class="box-card">
-      <div class="card-paragraph">
-        Maximum Team Size:
-        <el-select v-model="selectedTeamSize" placeholder="Choose" @change="updateTeamSize">
-          <el-option label="2" value="2" />
-          <el-option label="3" value="3" />
-          <el-option label="4" value="4" />
-          <el-option label="5" value="5" />
-        </el-select>
+        <el-card class="box-card">
+          <div class="card-paragraph">
+            Maximum Team Size:
+            <el-select
+              v-model="selectedTeamSize"
+              placeholder="Choose"
+              @change="updateTeamSize"
+            >
+              <el-option label="2" value="2" />
+              <el-option label="3" value="3" />
+              <el-option label="4" value="4" />
+              <el-option label="5" value="5" />
+            </el-select>
+          </div>
+        </el-card>
       </div>
-    </el-card>
-  </div>
 
-  <div class="box-card-container" style="margin-top: 20px">
+      <div class="box-card-container" style="margin-top: 20px">
         <el-card class="box-card">
           <div class="card-paragraph">
             <div class="inline-header" style="font-size: 1em">
               Required Agreements
             </div>
             <div class="left-paragraph">
-              Please note any non-disclosure agreement and/or intellectual 
-              property agreement that the students would be required to sign, 
-              or any US Citizenship requirements. Any agreements must be provided by the proposer.
+              Please note any non-disclosure agreement and/or intellectual
+              property agreement that the students would be required to sign, or
+              any US Citizenship requirements. Any agreements must be provided
+              by the proposer.
             </div>
-          
           </div>
         </el-card>
       </div>
@@ -514,11 +507,7 @@
               />
             </div>
             <div>
-              <el-checkbox
-              v-model="checked27" 
-              label="Other"
-              size="large"
-              />
+              <el-checkbox v-model="checked27" label="Other" size="large" />
               <el-input
                 v-model="otherInput"
                 placeholder=""
@@ -536,33 +525,45 @@
               Project Description
             </div>
             <div class="left-paragraph">
-              Feel free to include any other information or support material 
-              that will provide insight into the project for the proposal reviewers 
-              and students.  The more information you can provide the students to help 
-              them understand the problem and be motivated to work on the project, 
-              the more likely your project will be selected by the students.
+              Feel free to include any other information or support material
+              that will provide insight into the project for the proposal
+              reviewers and students. The more information you can provide the
+              students to help them understand the problem and be motivated to
+              work on the project, the more likely your project will be selected
+              by the students.
             </div>
-            </div>
-            </el-card>
-            </div>
+          </div>
+        </el-card>
+      </div>
 
-            <div class="box-card-container" style="margin-top: 20px">
+      <div class="box-card-container" style="margin-top: 20px">
         <el-card class="box-card">
           <div class="card-paragraph">
-            <div class="left-paragraph">Please inlcude links to any additional materials 
-              (presentations, additional documentation, etc) that you would like the students to view.</div>
+            <div class="left-paragraph">
+              Please inlcude links to any additional materials (presentations,
+              additional documentation, etc) that you would like the students to
+              view.
+            </div>
           </div>
           <div class="underline-input">
             <input placeholder="Your answer" />
           </div>
         </el-card>
       </div>
-
+    </div>
+    <div
+      class="button"
+      style="
+        margin-top: 20px;
+        display: flex;
+        justify-content: flex-end;
+        width: 925px;
+      "
+    >
+      <el-button :color="bg" plain @click="submitData">Submit</el-button>
     </div>
   </div>
 </template>
-
-
 
 <script>
 export default {
@@ -570,6 +571,7 @@ export default {
     return {
       organization: "",
       checked: false,
+      projectTitle:"",
     };
   },
   methods: {
@@ -579,6 +581,20 @@ export default {
         "_blank"
       );
     },
+
+    submitData(){
+      const projectData = {
+        title: this.projectTitle,
+      };
+
+      fetch('http://localhost:8080/addProject', {
+        method:'POST',
+        headers:{
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(projectData),
+      })
+    }
   },
 };
 // export const Component1 = {
