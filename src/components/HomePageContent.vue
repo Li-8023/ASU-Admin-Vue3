@@ -51,13 +51,27 @@
           </div>
         </div>
       </div>
-      <div class="link-container">
-        <router-link to="/Seminars" class="link-format"> HOST A SEMINAR </router-link>
-        <br />
-        <br />
-        <div class="sub-text">
-          Share your knowledge and advice with students that are about to
-          graduate!
+      <div class="top-links">
+        <div class="link-container">
+          <router-link to="/Seminars" class="link-format">
+            HOST A SEMINAR
+          </router-link>
+          <br />
+          <br />
+          <div class="sub-text">
+            Share your knowledge and advice with students that are about to
+            graduate!
+          </div>
+        </div>
+        <div class="link-container">
+          <router-link to="/projectDetail" class="link-format">
+            PROJECT DETAILS
+          </router-link>
+          <br />
+          <br />
+          <div class="sub-text">
+            View information on all projects. Find your favorite projects!  
+          </div>
         </div>
       </div>
     </div>

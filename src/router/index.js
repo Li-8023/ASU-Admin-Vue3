@@ -7,6 +7,7 @@ import SponsorForm from "../components/SponsorFormContent.vue"
 import StudentForm from "../components/StudentFormContent.vue";
 import PickProject from "../components/PickProject.vue";
 import SponsorHaveTeam from "../components/SponsorHaveTeam.vue";
+import ProjectDetail from "../components/ProjectDetail.vue";
 
 const routes = [
   {
@@ -49,6 +50,11 @@ const routes = [
     name: "Seminars",
     component: Seminars,
   },
+  {
+    path:"/projectDetail",
+    name:"ProjectDetail",
+    component: ProjectDetail,
+  }
 ];
 const router = createRouter({
   history: createWebHistory(),

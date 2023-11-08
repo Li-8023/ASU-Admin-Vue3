@@ -10,13 +10,20 @@
         <div class="pools-container">
           <div>
             <h3>CS / CSE Capstone Proposal Catalog</h3>
+            <el-input
+              type="text"
+              v-model="searchQuery"
+              placeholder="Search projects"
+              class="search-bar"
+              clearable
+            />
             <vue-draggable-next
-              v-model="choicePool"
+              v-model="filteredChoicePool"
               group="people"
               class="list-container"
             >
               <div
-                v-for="item in choicePool"
+                v-for="item in filteredChoicePool"
                 :key="item.id"
                 class="choicePool-item"
               >
@@ -52,7 +59,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed, watchEffect } from "vue";
 import LandingPage from "../components/LandingPage.vue";
 import { VueDraggableNext } from "vue-draggable-next";
 import { ElMessage } from "element-plus";
@@ -65,6 +72,12 @@ export default {
   setup() {
     const userPool = ref([]);
     const choicePool = ref([]);
+    const searchQuery = ref("");
+    const initialChoicePool = ref([]);
+
+    watchEffect(() => {
+      initialChoicePool.value = [...choicePool.value];
+    });
 
     const fetchProjects = async () => {
       const response = await fetch("http://localhost:8080/allProjects");
@@ -95,9 +108,17 @@ export default {
       }
     };
 
+    const filteredChoicePool = computed(() => {
+      return initialChoicePool.value.filter((project) =>
+        project.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+      );
+    });
+
     return {
       choicePool,
       userPool,
+      searchQuery,
+      filteredChoicePool,
       handleChange,
     };
   },
