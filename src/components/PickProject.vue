@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, onMounted} from "vue";
 import LandingPage from "../components/LandingPage.vue";
 import { VueDraggableNext } from "vue-draggable-next";
 import { ElMessage } from "element-plus";
@@ -63,19 +63,21 @@ export default {
     VueDraggableNext,
   },
   setup() {
-    const choicePool = ref([
-      { id: 1, name: "GenTech - Employee Scheduling Software" },
-      { id: 2, name: "ASU SCAI - Deterministic Fuzzing Replay and Debugging" },
-      {
-        id: 3,
-        name: "Lotus Addiction Therapy Inc - Lotus Addiction Therapy Mobile Application Development",
-      },
-      {id: 4, name:"DigiClips - DigiClips Media Search Engine"},
-      {id: 5, name:"The Big Leaf - KnowQuest Inc."},
-      {id: 6, name:"Performance Software - Airport Mapping Maintenance Automation"}
-    ]);
+    
 
     const userPool = ref([]);
+    const choicePool = ref([]);
+
+    const fetchProjects = async() => {
+      const response = await fetch('http://localhost:8080/projectsCsv');
+      const data = await response.json();
+
+      data.entity.forEach(project => {
+        choicePool.value.push({ id: project.id, name: project.title});
+      });
+    };
+
+    onMounted(fetchProjects);
 
     const handleChange = () => {
       // Check if the user pool has more than two items

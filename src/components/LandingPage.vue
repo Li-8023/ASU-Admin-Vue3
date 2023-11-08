@@ -23,7 +23,7 @@
         <router-link to="/Seminars">
           <el-menu-item index="4">Seminars</el-menu-item>
         </router-link>
-        <el-menu-item>
+        <!-- <el-menu-item>
           <el-input
             v-model="searchQuery"
             placeholder="Search..."
@@ -33,7 +33,7 @@
               <span class="material-symbols-outlined"> search </span>
             </template>
           </el-input>
-        </el-menu-item>
+        </el-menu-item> -->
         <div class="flex-grow" />
         <el-menu-item>
           <el-button text @click="centerDialogVisible = true">
