@@ -76,6 +76,8 @@
               />
             </div>
           </div>
+          <!-- Button to trigger the API request -->
+          <el-button @click="submitData">Submit</el-button>
         </el-card>
       </div>
 
@@ -89,55 +91,51 @@
           </div>
           <div class="checkbox-group">
             <div>
-              <el-checkbox v-model="checked1" label="Startup" size="large" />
+              <el-checkbox v-model="checked4" label="Startup" size="large" />
             </div>
             <div>
-              <el-checkbox v-model="checked2" label="Incubator" size="large" />
+              <el-checkbox v-model="checked5" label="Incubator" size="large" />
             </div>
             <div>
               <el-checkbox
-                v-model="checked3"
+                v-model="checked6"
                 label="Sole Proprietorship"
                 size="large"
               />
             </div>
             <div>
               <el-checkbox
-                v-model="checked4"
+                v-model="checked7"
                 label="Social Enterprise"
                 size="large"
               />
             </div>
             <div>
               <el-checkbox
-                v-model="checked5"
+                v-model="checked8"
                 label="Sole Proprietorship"
                 size="large"
               />
             </div>
             <div>
-              <el-checkbox v-model="checked6" label="Non-Profit" size="large" />
+              <el-checkbox v-model="checked9" label="Non-Profit" size="large" />
             </div>
             <div>
               <el-checkbox
-                v-model="checked7"
+                v-model="checked10"
                 label="Small to Medium Enterprise"
                 size="large"
               />
             </div>
             <div>
               <el-checkbox
-                v-model="checked8"
+                v-model="checked11"
                 label="Large Enterprise"
                 size="large"
               />
             </div>
-            <!-- <div>
-          <el-checkbox v-model="checked9" label="other" size="large" />
-          <el-input v-model="otherInput" placeholder="" />
-        </div>  -->
             <div class="other-checkbox-container">
-              <el-checkbox v-model="checked9" label="other" size="large" />
+              <el-checkbox v-model="checked12" label="other" size="large" />
               <el-input
                 v-model="otherInput"
                 placeholder=""
@@ -158,14 +156,14 @@
           </div>
           <div class="checkbox-group">
             <div>
-              <el-checkbox v-model="checked10" label="Yes" size="large" />
+              <el-checkbox v-model="checked13" label="Yes" size="large" />
             </div>
             <div>
-              <el-checkbox v-model="checked11" label="No" size="large" />
+              <el-checkbox v-model="checked14" label="No" size="large" />
             </div>
             <div>
               <el-checkbox
-                v-model="checked12"
+                v-model="checked15"
                 label="IP is not a concern"
                 size="large"
               />
@@ -186,14 +184,14 @@
           </div>
           <div class="checkbox-group">
             <div>
-              <el-checkbox v-model="checked13" label="Yes" size="large" />
+              <el-checkbox v-model="checked16" label="Yes" size="large" />
             </div>
             <div>
-              <el-checkbox v-model="checked14" label="No" size="large" />
+              <el-checkbox v-model="checked17" label="No" size="large" />
             </div>
             <div>
               <el-checkbox
-                v-model="checked15"
+                v-model="checked18"
                 label="No extra resources needed"
                 size="large"
               />
@@ -214,10 +212,10 @@
           </div>
           <div class="checkbox-group">
             <div>
-              <el-checkbox v-model="checked16" label="Yes" size="large" />
+              <el-checkbox v-model="checked19" label="Yes" size="large" />
             </div>
             <div>
-              <el-checkbox v-model="checked17" label="No" size="large" />
+              <el-checkbox v-model="checked20" label="No" size="large" />
             </div>
           </div>
         </el-card>
@@ -246,11 +244,8 @@
               Proposer Organization (Company or Department Name)
             </div>
           </div>
-          <div class="input-field">
-            <el-input
-              v-model="organization"
-              placeholder="Your answer"
-            ></el-input>
+          <div class="underline-input">
+            <input v-model="projectProposerOrganization" placeholder="" id="projectProposerOrganization">
           </div>
         </el-card>
       </div>
@@ -261,7 +256,7 @@
             <div class="left-paragraph">Proposer Name:</div>
           </div>
           <div class="underline-input">
-            <input placeholder="Your answer" />
+            <input v-model="projectProposerName" placeholder="Your answer" id="projectProposerName"/>
           </div>
         </el-card>
       </div>
@@ -272,7 +267,7 @@
             <div class="left-paragraph">Proposer Email Address:</div>
           </div>
           <div class="underline-input">
-            <input placeholder="Your answer" />
+            <input v-model="projectProposerEmail" placeholder="Your answer" id="projectProposerEmail"/>
           </div>
         </el-card>
       </div>
@@ -285,7 +280,7 @@
             </div>
           </div>
           <div class="underline-input">
-            <input placeholder="Your answer" />
+            <input v-model= "projectProjectContactName" placeholder="Your answer" id="projectProjectContactName" />
           </div>
         </el-card>
       </div>
@@ -343,7 +338,7 @@
             <div class="left-paragraph">Project Title:</div>
           </div>
           <div class="underline-input">
-            <input placeholder="Your answer" id="projectTitle"/>
+            <input v-model ="projectTitle" placeholder="Your answer" id="projectTitle" />
           </div>
         </el-card>
       </div>
@@ -400,28 +395,28 @@
           <div class="checkbox-group">
             <div>
               <el-checkbox
-                v-model="checked18"
+                v-model="checked21"
                 label="Significant Software Development (for CS students)"
                 size="large"
               />
             </div>
             <div>
               <el-checkbox
-                v-model="checked19"
+                v-model="checked22"
                 label="Significant Hardware / Embedded Software Development (for CSE Students)"
                 size="large"
               />
             </div>
             <div>
               <el-checkbox
-                v-model="checked20"
+                v-model="checked23"
                 label="Both Significant Software and Embedded Systems Development"
                 size="large"
               />
             </div>
             <div>
               <el-checkbox
-                v-model="checked21"
+                v-model="checked24"
                 label="Interdisciplinary project that may work with majors outside of CS and CSE"
                 size="large"
               />
@@ -472,28 +467,28 @@
           <div class="checkbox-group">
             <div>
               <el-checkbox
-                v-model="checked22"
+                v-model="checked25"
                 label="Non-Disclosure Agreement"
                 size="large"
               />
             </div>
             <div>
               <el-checkbox
-                v-model="checked23"
+                v-model="checked26"
                 label="Intellectual Property Agreement"
                 size="large"
               />
             </div>
             <div>
               <el-checkbox
-                v-model="checked24"
+                v-model="checked27"
                 label="Ability to Obtain US Security Clearance"
                 size="large"
               />
             </div>
             <div>
               <el-checkbox
-                v-model="checked25"
+                v-model="checked28"
                 label="No Agreements are required."
                 size="large"
               />
@@ -501,15 +496,15 @@
 
             <div>
               <el-checkbox
-                v-model="checked26"
+                v-model="checked29"
                 label="US Citizenship Required"
                 size="large"
               />
             </div>
             <div>
-              <el-checkbox v-model="checked27" label="Other" size="large" />
+              <el-checkbox v-model="checked30" label="Other" size="large" />
               <el-input
-                v-model="otherInput"
+                v-model="otherInput1"
                 placeholder=""
                 class="input-with-space"
               />
@@ -569,9 +564,34 @@
 export default {
   data() {
     return {
-      organization: "",
-      checked: false,
-      projectTitle:"",
+      projectTitle: "",
+      checked1: false,
+      checked2: false,
+      checked3: false,
+      checked4: false,
+      checked5: false,
+      checked6: false,
+      checked7: false,
+      checked8: false,
+      checked9: false,
+      checked10: false,
+      checked11: false,
+      checked12: false,
+      otherInput: "",
+      checked13: false,
+      checked14: false,
+      checked15: false,
+      checked16: false,
+      checked17: false,
+      checked18: false,
+      checked19: false,
+      checked20: false,
+      projectProposerOrganization: "",
+      projectProposerName:"",
+      projectProposerEmail:"",
+      projectProjectContactName:""
+      
+      
     };
   },
   methods: {
@@ -582,64 +602,146 @@ export default {
       );
     },
 
-    submitData(){
+    submitData() {
+      let selectedCohort = "";
+      if (this.checked1) {
+        selectedCohort +=
+          " Spring 2024 to Fall 2024 (students do not work over summer break) ";
+      }
+      if (this.checked2) {
+        selectedCohort += " Summer 2024 to Fall 2024 ";
+      }
+      if (this.checked3) {
+        selectedCohort += " Fall 2024 to Spring 2024 ";
+      }
+      // second question
+      let selectedClassifications = "";
+      if (this.checked4) {
+        selectedClassifications += "Startup, ";
+      }
+      if (this.checked5) {
+        selectedClassifications += "Incubator, ";
+      }
+      if (this.checked6) {
+        selectedClassifications += "Sole Proprietorship, ";
+      }
+      if (this.checked7) {
+        selectedClassifications += "Social Enterprise, ";
+      }
+      if (this.checked8) {
+        selectedClassifications += "Sole Proprietorship, ";
+      }
+      if (this.checked9) {
+        selectedClassifications += "Non-Profit, ";
+      }
+      if (this.checked10) {
+        selectedClassifications += "Small to Medium Enterprise, ";
+      }
+      if (this.checked11) {
+        selectedClassifications += "Large Enterprise, ";
+      }
+      if (this.checked12) {
+        selectedClassifications += this.otherInput;
+      }
+      //third
+      let selectedintellectualPropertyConcerns = "";
+      if (this.checked13) {
+        selectedintellectualPropertyConcerns += " Yes ";
+      }
+      if (this.checked14) {
+        selectedintellectualPropertyConcerns += " No ";
+      }
+      if (this.checked15) {
+        selectedintellectualPropertyConcerns += " IP is not a concern";
+      }
+
+    //
+      let selectedprojectResourcesProvided = "";
+      if (this.checked16) {
+        selectedintellectualPropertyConcerns += " Yes ";
+      }
+      if (this.checked17) {
+        selectedintellectualPropertyConcerns += " No ";
+      }
+      if (this.checked18) {
+        selectedintellectualPropertyConcerns += " No extra resources needed";
+      }
+
+      //
+      let selecteddedicatedContact = "";
+      if (this.checked19) {
+        selecteddedicatedContact += " Yes ";
+      }
+      if (this.checked20) {
+        selecteddedicatedContact += " No";
+      }
+      //
+    
+
+
       const projectData = {
         title: this.projectTitle,
+        timestamp: "2023-02-09T13:00:51Z",
+        cohort: selectedCohort,
+        organizationClassification: selectedClassifications,
+        intellectualPropertyConcerns: selectedintellectualPropertyConcerns,
+        projectResourcesProvided: selectedprojectResourcesProvided,
+        dedicatedContact: selecteddedicatedContact,
+        proposerOrganization: this.projectProposerOrganization,
+        proposerName: this.projectProposerName,
+        // proposerEmail: this.projectProposerEmail
+        projectContactName: this.projectProjectContactName
       };
 
-      fetch('http://localhost:8080/addProject', {
-        method:'POST',
-        headers:{
-          'Content-Type': 'application/json',
+      fetch("http://localhost:8080/addProject", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(projectData),
       })
-    }
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("Data sent successfully:", data);
+
+          // Optionally, you can reset the checkboxes after successful submission
+          this.checked1 = false;
+          this.checked2 = false;
+          this.checked3 = false;
+          this.checked4 = false;
+          this.checked5 = false;
+          this.checked6 = false;
+          this.checked7 = false;
+          this.checked8 = false;
+          this.checked9 = false;
+          this.checked10 = false;
+          this.checked11 = false;
+          this.checked12 = false;
+          this.otherInput = "";
+          this.checked13 = false;
+          this.checked14 = false;
+          this.checked15 = false;
+          this.checked16 = false;
+          this.checked17 = false;
+          this.checked18 = false;
+          this.checked19 = false;
+          this.checked20 = false;
+        })
+        .catch((error) => {
+          console.error("Error sending data:", error);
+        });
+    },
   },
 };
-// export const Component1 = {
-//   data() {
-//     return {
-//       organization: "",
-//       checked: false,
-//     };
-//   },
-//   methods: {
-//     switchAccount() {
-//       window.open(
-//         "https://accounts.google.com/AccountChooser/signinchooser?continue=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2F...",
-//         "_blank"
-//       );
-//     },
-//   },
-// };
-
-// // Export the second component
-// export const Component2 = {
-//   data() {
-//     return {
-//       selectedTeamSize: null,
-//     };
-//   },
-//   methods: {
-//     updateTeamSize() {
-//       // You can access the selected value with this.selectedTeamSize
-//       console.log('Selected Team Size:', this.selectedTeamSize);
-//     },
-//     switchAccount() {
-//       window.open(
-//         "https://accounts.google.com/AccountChooser/signinchooser?continue=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2F...",
-//         "_blank"
-//       );
-//     },
-//   },
-// };
 </script>
 
 <script setup>
 import LandingPage from "../components/LandingPage.vue";
-const otherInput = "";
-const organization = "";
 </script>
 
 <style>
