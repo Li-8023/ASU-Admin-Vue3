@@ -7,6 +7,9 @@
     <div class="Pick-main-content">
       <div class="pick-container">
         <div class="Pick-title">PICK YOUR TOP 10 PROJECTS</div>
+         <div class="button-container">
+           <el-button color="maroon" plain @click="submit">Submit</el-button>
+          </div>
         <div class="pools-container">
           <div>
             <h3>CS / CSE Capstone Proposal Catalog</h3>
@@ -31,7 +34,6 @@
               </div>
             </vue-draggable-next>
           </div>
-
           <div>
             <h3>Top 10 Projects</h3>
             <div class="user-choice-container">
@@ -83,8 +85,6 @@ export default {
       const response = await fetch("http://localhost:8080/allProjects");
       const data = await response.json();
 
-      console.log("data: " + JSON.stringify(data));
-
       if (data) {
         data.forEach((project) => {
           choicePool.value.push({ id: project.id, name: project.title });
@@ -114,12 +114,27 @@ export default {
       );
     });
 
+    const submit = async() =>{
+      const projectIds = userPool.value.map(item => item.id);
+      const response = await fetch(`http://localhost:8080/projectSignup/1`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(projectIds)
+      });
+      if (!response.ok) {
+        console.error('Error submitting projects:', await response.text());
+      }
+    }
+
     return {
       choicePool,
       userPool,
       searchQuery,
       filteredChoicePool,
       handleChange,
+      submit,
     };
   },
 };

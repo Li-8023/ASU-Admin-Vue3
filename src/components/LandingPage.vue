@@ -73,7 +73,14 @@
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="centerDialogVisible = false">Cancel</el-button>
-          <el-button type="primary" @click="centerDialogVisible = false" class="dialog-signin-button">
+          <el-button
+            type="primary"
+            @click="
+              login();
+              centerDialogVisible = false
+            "
+            class="dialog-signin-button"
+          >
             Sign In
           </el-button>
         </span>
@@ -96,6 +103,7 @@ export default {
       centerDialogVisible: ref(false),
       password: ref(""),
       id: ref(""),
+      studentId: ref(null),
     };
   },
   methods: {
@@ -104,20 +112,45 @@ export default {
     },
     search() {
       console.log("Searching for:", this.searchQuery);
-      fetch(`https://search.asu.edu/search/?q=${encodeURIComponent(this.searchQuery)}`)
-      .then(response => response.json())
-      .then(data => {
-        console.log(data);
-        // Here you can process the search results
+      fetch(
+        `https://search.asu.edu/search/?q=${encodeURIComponent(
+          this.searchQuery
+        )}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          // Here you can process the search results
+        })
+        .catch((err) => console.error("Error searching:", err));
+    },
+    login() {
+
+      console.log("sign in process");
+      const body = JSON.stringify({
+        asuriteID: this.id.value,
+        studentID: this.password.value,
+      });
+
+      fetch("http://localhost:8080/studentLogin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body,
       })
-      .catch(err => console.error("Error searching:", err));
+        .then((response) => response.json())
+        .then((data) => {
+          this.studentId.value = data;
+        })
+        .catch((e) => console.error("Error login in: ", e));
     },
   },
 };
 </script>
 
 <style scoped>
-.dialog-signin-button{
+.dialog-signin-button {
   background-color: maroon !important;
   border-color: maroon !important;
 }
@@ -149,7 +182,6 @@ export default {
   color: maroon !important;
   font-weight: bold !important;
 }
-
 
 .flex-grow {
   flex-grow: 50;
