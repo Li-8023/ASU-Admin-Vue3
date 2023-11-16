@@ -77,7 +77,7 @@
             type="primary"
             @click="
               login();
-              centerDialogVisible = false
+              centerDialogVisible = false;
             "
             class="dialog-signin-button"
           >
@@ -99,12 +99,18 @@ export default {
     return {
       searchQuery: "",
       activeIndex: "1",
-      username: "Login",
+      username: "Sign here",
       centerDialogVisible: ref(false),
       password: ref(""),
       id: ref(""),
       studentId: ref(null),
     };
+  },
+   created() {
+    let storedUsername = sessionStorage.getItem('username');
+    if (storedUsername) {
+      this.username = storedUsername;
+    }
   },
   methods: {
     handleSelect(key, keyPath) {
@@ -125,23 +131,23 @@ export default {
         .catch((err) => console.error("Error searching:", err));
     },
     login() {
-
       console.log("sign in process");
-      const body = JSON.stringify({
-        asuriteID: this.id.value,
-        studentID: this.password.value,
-      });
+      console.log(this.id);
 
-      fetch("http://localhost:8080/studentLogin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body,
-      })
+      fetch(
+        `http://localhost:8080/studentLogin/${this.id}/${this.password}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
         .then((response) => response.json())
         .then((data) => {
-          this.studentId.value = data;
+          sessionStorage.setItem('studentId', data);
+          sessionStorage.setItem('username', this.id);
+           this.username = this.id;
         })
         .catch((e) => console.error("Error login in: ", e));
     },

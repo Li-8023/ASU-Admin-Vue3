@@ -7,9 +7,9 @@
     <div class="Pick-main-content">
       <div class="pick-container">
         <div class="Pick-title">PICK YOUR TOP 10 PROJECTS</div>
-         <div class="button-container">
-           <el-button color="maroon" plain @click="submit">Submit</el-button>
-          </div>
+        <div class="button-container">
+          <el-button color="maroon" plain @click="submit">Submit</el-button>
+        </div>
         <div class="pools-container">
           <div>
             <h3>CS / CSE Capstone Proposal Catalog</h3>
@@ -29,6 +29,10 @@
                 v-for="item in filteredChoicePool"
                 :key="item.id"
                 class="choicePool-item"
+                @click="
+                  showProjectDetail(item.description);
+                  openNotification(item.id);
+                "
               >
                 {{ item.name }}
               </div>
@@ -61,10 +65,10 @@
 </template>
 
 <script>
-import { ref, onMounted, computed, watchEffect } from "vue";
+import { ref, onMounted, computed, watchEffect, h } from "vue";
 import LandingPage from "../components/LandingPage.vue";
 import { VueDraggableNext } from "vue-draggable-next";
-import { ElMessage } from "element-plus";
+import { ElMessage, ElNotification } from "element-plus";
 
 export default {
   components: {
@@ -76,7 +80,7 @@ export default {
     const choicePool = ref([]);
     const searchQuery = ref("");
     const initialChoicePool = ref([]);
-
+    const projectDetail = ref("");
     watchEffect(() => {
       initialChoicePool.value = [...choicePool.value];
     });
@@ -86,12 +90,37 @@ export default {
       const data = await response.json();
 
       if (data) {
+        console.log("Fetched data: ", data);
         data.forEach((project) => {
           choicePool.value.push({ id: project.id, name: project.title });
         });
+
+        console.log("choicePool after adding projects: ", choicePool.value);
       } else {
         console.error("Data is undefined");
       }
+    };
+
+    const openNotification = async (id) => {
+      try {
+        const response = await fetch(`http://localhost:8080/findProject/${id}`);
+        if (!response.ok) {
+          throw new Error("HTTP error " + response.status);
+        }
+        const project = await response.json();
+        projectDetail.value = project.description;
+
+        ElNotification({
+          // title: project.title,
+          message: h("i", { style: "color: maroon" }, project.description),
+        });
+      } catch (error) {
+        console.log("Fetch error: " + error.message);
+      }
+    };
+
+    const showProjectDetail = (description) => {
+      projectDetail.value = description;
     };
 
     onMounted(fetchProjects);
@@ -106,6 +135,8 @@ export default {
         const removedItem = userPool.value.pop();
         choicePool.value.push(removedItem);
       }
+
+      console.log("userpool after selecting a project: ", userPool.value);
     };
 
     const filteredChoicePool = computed(() => {
@@ -114,19 +145,34 @@ export default {
       );
     });
 
-    const submit = async() =>{
-      const projectIds = userPool.value.map(item => item.id);
-      const response = await fetch(`http://localhost:8080/projectSignup/1`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(projectIds)
-      });
+    const submit = async () => {
+      const studentId = sessionStorage.getItem("studentId");
+      console.log("student id", studentId);
+      const projectIds = userPool.value.map((item) => item.id);
+      console.log("project id before submitting", projectIds);
+      const response = await fetch(
+        `http://localhost:8080/projectSignup/${studentId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(projectIds),
+        }
+      );
       if (!response.ok) {
-        console.error('Error submitting projects:', await response.text());
+        console.error("Error submitting projects:", await response.text());
+      } else {
+        console.log(" Successfully submitted" + JSON.stringify(projectIds));
+
+        // Show success message
+        ElMessage({
+          message: "Congrats, projects submitted successfully.",
+          type: "success",
+        });
+        userPool.value = [];
       }
-    }
+    };
 
     return {
       choicePool,
@@ -135,6 +181,9 @@ export default {
       filteredChoicePool,
       handleChange,
       submit,
+      projectDetail,
+      openNotification,
+      showProjectDetail,
     };
   },
 };
