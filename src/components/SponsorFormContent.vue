@@ -77,7 +77,7 @@
             </div>
           </div>
           <!-- Button to trigger the API request -->
-          <el-button @click="submitData">Submit</el-button>
+          <!-- <el-button @click="submitData">Submit</el-button> -->
         </el-card>
       </div>
 
@@ -268,6 +268,7 @@
           </div>
           <div class="underline-input">
             <input v-model="projectProposerEmail" placeholder="Your answer" id="projectProposerEmail"/>
+            
           </div>
         </el-card>
       </div>
@@ -349,7 +350,7 @@
             <div class="left-paragraph">Project Description:</div>
           </div>
           <div class="underline-input">
-            <input placeholder="Your answer" />
+            <input v-model = "projectDescription" placeholder="Your answer" id="projectDescription"/>
           </div>
         </el-card>
       </div>
@@ -360,7 +361,7 @@
             <div class="left-paragraph">Student Learning Experience:</div>
           </div>
           <div class="underline-input">
-            <input placeholder="Your answer" />
+            <input v-model = "projectStudentLearningExperience" placeholder="Your answer" id = "projectStudentLearningExperience" />
           </div>
         </el-card>
       </div>
@@ -371,7 +372,7 @@
             <div class="left-paragraph">Expected Deliverables:</div>
           </div>
           <div class="underline-input">
-            <input placeholder="Your answer" />
+            <input v-model = "projectExpectedDeliverables" placeholder="Your answer" id="projectExpectedDeliverables" />
           </div>
         </el-card>
       </div>
@@ -382,7 +383,7 @@
             <div class="left-paragraph">Desired Background:</div>
           </div>
           <div class="underline-input">
-            <input placeholder="Your answer" />
+            <input v-model = "projectDesiredBackground" placeholder="Your answer" id="projectDesiredBackground"/>
           </div>
         </el-card>
       </div>
@@ -589,8 +590,15 @@ export default {
       projectProposerOrganization: "",
       projectProposerName:"",
       projectProposerEmail:"",
-      projectProjectContactName:""
-      
+      projectProjectContactName:"",
+      projectDescription:"",
+      projectStudentLearningExperience:"",
+      projectExpectedDeliverables:"",
+      projectDesiredBackground:"",
+      checked21: false,
+      checked22: false,
+      checked23: false,
+      checked24: false
       
     };
   },
@@ -676,7 +684,19 @@ export default {
         selecteddedicatedContact += " No";
       }
       //
-    
+      let selectedProjectFocus = "";
+      if (this.checked21) {
+        selectedProjectFocus += "Significant Software Development (for CS students)";
+      }
+      if (this.checked22) {
+        selectedProjectFocus += " Significant Hardware / Embedded Software Development (for CSE Students)";
+      }
+      if (this.checked23) {
+        selectedProjectFocus += " Both Significant Software and Embedded Systems Development";
+      }
+      if (this.checked24) {
+        selectedProjectFocus += " Interdisciplinary project that may work with majors outside of CS and CSE";
+      }
 
 
       const projectData = {
@@ -690,7 +710,12 @@ export default {
         proposerOrganization: this.projectProposerOrganization,
         proposerName: this.projectProposerName,
         // proposerEmail: this.projectProposerEmail
-        projectContactName: this.projectProjectContactName
+        projectContactName: this.projectProjectContactName,
+        description: this.projectDescription,
+        studentLearningExperience: this.projectStudentLearningExperience,
+        expectedDeliverables: this.projectExpectedDeliverables,
+        desiredBackground: this.projectDesiredBackground,
+        projectFocus: selectedProjectFocus
       };
 
       fetch("http://localhost:8080/addProject", {
@@ -731,6 +756,10 @@ export default {
           this.checked18 = false;
           this.checked19 = false;
           this.checked20 = false;
+          this.checked21 = false;
+          this.checked22 = false;
+          this.checked23 = false;
+          this.checked24 = false;
         })
         .catch((error) => {
           console.error("Error sending data:", error);
@@ -742,6 +771,9 @@ export default {
 
 <script setup>
 import LandingPage from "../components/LandingPage.vue";
+
+
+
 </script>
 
 <style>
