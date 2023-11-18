@@ -7,9 +7,9 @@
     <div class="Pick-main-content">
       <div class="pick-container">
         <div class="Pick-title">PICK YOUR TOP 10 PROJECTS</div>
-         <div class="button-container">
-           <el-button color="maroon" plain @click="submit">Submit</el-button>
-          </div>
+        <div class="button-container">
+          <el-button color="maroon" plain @click="submit">Submit</el-button>
+        </div>
         <div class="pools-container">
           <div>
             <h3>CS / CSE Capstone Proposal Catalog</h3>
@@ -29,6 +29,7 @@
                 v-for="item in filteredChoicePool"
                 :key="item.id"
                 class="choicePool-item"
+                @click="showProjectDescription(item.id)"
               >
                 {{ item.name }}
               </div>
@@ -47,6 +48,7 @@
                   v-for="(item, index) in userPool"
                   :key="item.id"
                   class="userPool-item"
+                  @click="showProjectDescription(item.id)"
                 >
                   <span class="item-tag">{{ index + 1 }}</span>
                   <span class="item-name">{{ item.name }}</span>
@@ -64,7 +66,7 @@
 import { ref, onMounted, computed, watchEffect } from "vue";
 import LandingPage from "../components/LandingPage.vue";
 import { VueDraggableNext } from "vue-draggable-next";
-import { ElMessage } from "element-plus";
+import { ElMessage, ElMessageBox } from "element-plus";
 
 export default {
   components: {
@@ -76,7 +78,6 @@ export default {
     const choicePool = ref([]);
     const searchQuery = ref("");
     const initialChoicePool = ref([]);
-
     watchEffect(() => {
       initialChoicePool.value = [...choicePool.value];
     });
@@ -97,12 +98,9 @@ export default {
     onMounted(fetchProjects);
 
     const handleChange = () => {
-      // Check if the user pool has more than two items
       if (userPool.value.length > 10) {
-        // Display an error message
         ElMessage.error("You can only have up to ten items in the user pool.");
 
-        // Move the last item added back to the choice pool
         const removedItem = userPool.value.pop();
         choicePool.value.push(removedItem);
       }
@@ -114,19 +112,72 @@ export default {
       );
     });
 
-    const submit = async() =>{
-      const projectIds = userPool.value.map(item => item.id);
-      const response = await fetch(`http://localhost:8080/projectSignup/1`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(projectIds)
-      });
-      if (!response.ok) {
-        console.error('Error submitting projects:', await response.text());
+    const submit = async () => {
+      const studentId = sessionStorage.getItem("studentId");
+
+      if (!studentId) {
+        ElMessage.error(
+          "If you are a student, please log in. If you are not a student, you don't have permission to submit."
+        );
+        return;
       }
-    }
+
+      const projectIds = userPool.value.map((item) => item.id);
+      if (projectIds.length !== 10) {
+        ElMessage.error("Please choose exactly 10 projects.");
+        return;
+      }
+
+      const response = await fetch(
+        `http://localhost:8080/projectSignup/${studentId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(projectIds),
+        }
+      );
+      if (!response.ok) {
+        console.error("Error submitting projects:", await response.text());
+      } else {
+        console.log(" Successfully submitted" + JSON.stringify(projectIds));
+
+        ElMessage({
+          message: "Congrats, projects submitted successfully.",
+          type: "success",
+        });
+        userPool.value = [];
+      }
+    };
+
+    const showProjectDescription = async (projectId) => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/findProject/${projectId}`
+        );
+        const data = await response.json();
+
+        if (data && data.description) {
+          showPopup(data.description);
+        } else {
+          ElMessage.error("There is no description for this project.");
+        }
+      } catch (error) {
+        console.error("Error fetching project description:", error);
+        ElMessage({
+          message: "Something went wrong",
+          type: "error",
+        });
+      }
+    };
+
+    const showPopup = (description) => {
+      ElMessageBox.alert(description, "Project Description", {
+        confirmButtonText: "OK",
+        customClass: "project-description-popup",
+      }).catch(() => {});
+    };
 
     return {
       choicePool,
@@ -135,6 +186,7 @@ export default {
       filteredChoicePool,
       handleChange,
       submit,
+      showProjectDescription,
     };
   },
 };
@@ -210,5 +262,9 @@ export default {
 
 .item-name {
   flex-grow: 1;
+}
+
+.project-description-popup {
+  max-width: 600px;
 }
 </style>

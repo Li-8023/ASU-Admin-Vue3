@@ -65,7 +65,6 @@ export default {
     try {
       const response = await axios.get("http://localhost:8080/allProjects");
       this.projects = response.data;
-      console.log("projects" + this.projects);
     } catch (e) {
       console.error(e);
     }
