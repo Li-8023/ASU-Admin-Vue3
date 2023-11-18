@@ -23,17 +23,6 @@
         <router-link to="/Seminars">
           <el-menu-item index="4">Seminars</el-menu-item>
         </router-link>
-        <!-- <el-menu-item>
-          <el-input
-            v-model="searchQuery"
-            placeholder="Search..."
-            @keyup.enter="search"
-          >
-            <template #prepend>
-              <span class="material-symbols-outlined"> search </span>
-            </template>
-          </el-input>
-        </el-menu-item> -->
         <div class="flex-grow" />
         <el-menu-item>
           <el-button text @click="centerDialogVisible = true">
@@ -49,30 +38,54 @@
       width="30%"
       align-center
     >
-      <div class="dialog-content">
-        <el-form-item label="ASURITE User ID:">
-          <el-input
-            v-model="id"
-            id="id"
-            type="text"
-            required
-            placeholder="Please input ASURITE"
-            style="margin-bottom: 10px"
-          />
-        </el-form-item>
-        <el-form-item label="Password:">
-          <el-input
-            v-model="password"
-            required
-            type="password"
-            placeholder="Please enter your ASUID as the password"
-            show-password
-          />
-        </el-form-item>
-      </div>
+      <el-tabs v-model="role" type="border-card">
+        <el-tab-pane label="Admin" name="admin">
+          <el-form-item label="Email:">
+            <el-input
+              v-model="adminEmail"
+              id="email"
+              type="email"
+              required
+              placeholder="Please input email"
+              style="margin-bottom: 10px"
+            />
+          </el-form-item>
+          <el-form-item label="Password:">
+            <el-input
+              v-model="adminPassword"
+              required
+              type="password"
+              placeholder="Please enter your password"
+              show-password
+            />
+          </el-form-item>
+        </el-tab-pane>
+
+        <el-tab-pane label="Student" name="user">
+          <el-form-item label="ASURITE User ID:">
+            <el-input
+              v-model="id"
+              id="id"
+              type="text"
+              required
+              placeholder="Please input ASURITE"
+              style="margin-bottom: 10px"
+            />
+          </el-form-item>
+          <el-form-item label="Password:">
+            <el-input
+              v-model="password"
+              required
+              type="password"
+              placeholder="Please enter your ASUID as password"
+              show-password
+            />
+          </el-form-item>
+        </el-tab-pane>
+      </el-tabs>
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="centerDialogVisible = false">Cancel</el-button>
+          <el-button @click="logout">Log Out</el-button>
           <el-button
             type="primary"
             @click="
@@ -91,6 +104,7 @@
 
 <script setup>
 import { ref } from "vue";
+import { ElMessage } from "element-plus";
 </script>
 
 <script>
@@ -99,15 +113,18 @@ export default {
     return {
       searchQuery: "",
       activeIndex: "1",
-      username: "Sign here",
+      username: "Log In",
       centerDialogVisible: ref(false),
       password: ref(""),
       id: ref(""),
       studentId: ref(null),
+      adminEmail: ref(""),
+      adminPassword: ref(""),
+      role: "",
     };
   },
-   created() {
-    let storedUsername = sessionStorage.getItem('username');
+  created() {
+    let storedUsername = sessionStorage.getItem("username");
     if (storedUsername) {
       this.username = storedUsername;
     }
@@ -116,40 +133,89 @@ export default {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
     },
-    search() {
-      console.log("Searching for:", this.searchQuery);
-      fetch(
-        `https://search.asu.edu/search/?q=${encodeURIComponent(
-          this.searchQuery
-        )}`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          // Here you can process the search results
-        })
-        .catch((err) => console.error("Error searching:", err));
-    },
     login() {
-      console.log("sign in process");
-      console.log(this.id);
+      if (this.role == "admin") {
+        fetch(
+          `http://localhost:8080/adminLogin/${this.adminEmail}/${this.adminPassword}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            if(data.length !== 2){
+              ElMessage({
+                showClose: true,
+                message:"Admin not found.",
+                type:"error",
+              });
 
-      fetch(
-        `http://localhost:8080/studentLogin/${this.id}/${this.password}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          sessionStorage.setItem('studentId', data);
-          sessionStorage.setItem('username', this.id);
-           this.username = this.id;
-        })
-        .catch((e) => console.error("Error login in: ", e));
+            }else{
+              sessionStorage.setItem("adminId", data[0]);
+              this.username = data[1];
+              ElMessage({
+                showClose: true,
+                message:"Successful login",
+                type:"success",
+              })
+            }
+          })
+          .catch((error) => {
+            ElMessage({
+                showClose: true,
+                message:"An error occurred.",
+                type:"error",
+              });
+              console.log(error);
+          });
+      } else {
+        fetch(
+          `http://localhost:8080/studentLogin/${this.id}/${this.password}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            if(data.length !== 2){
+              ElMessage({
+                showClose: true,
+                message:"Student not found. If this is a mistake please reach out to your capstone professor to get access to the site.",
+                type:"error",
+              });
+
+            }else{
+              sessionStorage.setItem("studentId", data[0]);
+              this.username = data[1];
+              ElMessage({
+                showClose: true,
+                message:"Successful login",
+                type:"success",
+              })
+            }
+          })
+          .catch((error) => {
+            ElMessage({
+                showClose: true,
+                message:"An error occurred.",
+                type:"error",
+              });
+              console.log(error);
+          });
+      }
+    },
+    logout() {
+      sessionStorage.removeItem("studentId");
+      sessionStorage.removeItem("username");
+      sessionStorage.removeItem("adminId");
+      this.username = "Log In";
+      this.centerDialogVisible = false;
     },
   },
 };
