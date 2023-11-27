@@ -23,6 +23,9 @@
         <router-link to="/Seminars">
           <el-menu-item index="4">Seminars</el-menu-item>
         </router-link>
+        <router-link to="/admin">
+          <el-menu-item index="4">Administrators</el-menu-item>
+        </router-link>
         <div class="flex-grow" />
         <el-menu-item>
           <el-button text @click="centerDialogVisible = true">
@@ -134,6 +137,19 @@ export default {
       console.log(key, keyPath);
     },
     login() {
+      if (
+        sessionStorage.getItem("adminId") ||
+        sessionStorage.getItem("studentId")
+      ) {
+        ElMessage({
+          showClose: true,
+          message: "You need to log out first.",
+          type: "error",
+        });
+        return;
+      }
+
+      // Admin login
       if (this.role == "admin") {
         fetch(
           `http://localhost:8080/adminLogin/${this.adminEmail}/${this.adminPassword}`,
@@ -146,32 +162,35 @@ export default {
         )
           .then((response) => response.json())
           .then((data) => {
-            if(data.length !== 2){
+            if (data.length !== 2) {
               ElMessage({
                 showClose: true,
-                message:"Admin not found.",
-                type:"error",
+                message: "Admin not found.",
+                type: "error",
               });
-
-            }else{
+            } else {
               sessionStorage.setItem("adminId", data[0]);
+              // Assuming the data[1] is the admin's first name.
               this.username = data[1];
+              sessionStorage.setItem("username", this.username); // Store the username
               ElMessage({
                 showClose: true,
-                message:"Successful login",
-                type:"success",
-              })
+                message: "Successful login",
+                type: "success",
+              });
             }
           })
           .catch((error) => {
             ElMessage({
-                showClose: true,
-                message:"An error occurred.",
-                type:"error",
-              });
-              console.log(error);
+              showClose: true,
+              message: "An error occurred.",
+              type: "error",
+            });
+            console.log(error);
           });
-      } else {
+      }
+      // Student login
+      else {
         fetch(
           `http://localhost:8080/studentLogin/${this.id}/${this.password}`,
           {
@@ -183,37 +202,38 @@ export default {
         )
           .then((response) => response.json())
           .then((data) => {
-            if(data.length !== 2){
+            if (data.length !== 2) {
               ElMessage({
                 showClose: true,
-                message:"Student not found. If this is a mistake please reach out to your capstone professor to get access to the site.",
-                type:"error",
+                message:
+                  "Student not found. If this is a mistake please reach out to your capstone professor to get access to the site.",
+                type: "error",
               });
-
-            }else{
+            } else {
               sessionStorage.setItem("studentId", data[0]);
               this.username = data[1];
+              sessionStorage.setItem("username", this.username); // Store the username
               ElMessage({
                 showClose: true,
-                message:"Successful login",
-                type:"success",
-              })
+                message: "Successful login",
+                type: "success",
+              });
             }
           })
           .catch((error) => {
             ElMessage({
-                showClose: true,
-                message:"An error occurred.",
-                type:"error",
-              });
-              console.log(error);
+              showClose: true,
+              message: "An error occurred.",
+              type: "error",
+            });
+            console.log(error);
           });
       }
     },
     logout() {
       sessionStorage.removeItem("studentId");
-      sessionStorage.removeItem("username");
       sessionStorage.removeItem("adminId");
+      sessionStorage.removeItem("username"); 
       this.username = "Log In";
       this.centerDialogVisible = false;
     },

@@ -53,7 +53,7 @@ import axios from "axios";
 
 <script>
 export default {
-  component: {
+  components: {
     LandingPage,
   },
   data() {

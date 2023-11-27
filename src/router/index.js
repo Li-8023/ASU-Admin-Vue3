@@ -8,6 +8,9 @@ import StudentForm from "../components/StudentFormContent.vue";
 import PickProject from "../components/PickProject.vue";
 import SponsorHaveTeam from "../components/SponsorHaveTeam.vue";
 import ProjectDetail from "../components/ProjectDetail.vue";
+import StudentDetail from "../components/StudentDetail.vue";
+import AdminDetail from "../components/AdminDetail.vue";
+import AdminPage from "../components/AdminMainPage.vue";
 
 const routes = [
   {
@@ -24,6 +27,11 @@ const routes = [
     path: "/sponsor",
     name: "Sponsor",
     component: Sponsor,
+  },
+  {
+    path: "/admin",
+    name:"Admin",
+    component: AdminPage,
   },
   {
     path: "/sponsorForm",
@@ -54,6 +62,16 @@ const routes = [
     path:"/projectDetail",
     name:"ProjectDetail",
     component: ProjectDetail,
+  },
+  {
+    path:"/studentDetail",
+    name:"StudentDetail",
+    component: StudentDetail,
+  },
+  {
+    path:"/adminDetail",
+    name:"AdminDetail",
+    component: AdminDetail,
   }
 ];
 const router = createRouter({
