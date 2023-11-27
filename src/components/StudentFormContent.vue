@@ -39,12 +39,12 @@
               >
             </div>
           </div>
-          <div class="additional-info">
+          <!-- <div class="additional-info">
             <p>Email: <strong>example@example.com</strong></p>
             <el-button type="text" @click="switchAccount"
               >Switch Account</el-button
             >
-          </div>
+          </div> -->
         </el-card>
       </div>
 

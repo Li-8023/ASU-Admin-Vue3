@@ -36,13 +36,13 @@
               >
             </div>
           </div>
-          <el-divider border-style="double" />
+          <!-- <el-divider border-style="double" />
           <div class="additional-info">
             <p>Email: <strong>example@example.com</strong></p>
             <el-button type="text" @click="switchAccount"
               >Switch Account</el-button
             >
-          </div>
+          </div> -->
         </el-card>
       </div>
 
@@ -245,7 +245,11 @@
             </div>
           </div>
           <div class="underline-input">
-            <input v-model="projectProposerOrganization" placeholder="" id="projectProposerOrganization">
+            <input
+              v-model="projectProposerOrganization"
+              placeholder=""
+              id="projectProposerOrganization"
+            />
           </div>
         </el-card>
       </div>
@@ -256,7 +260,11 @@
             <div class="left-paragraph">Proposer Name:</div>
           </div>
           <div class="underline-input">
-            <input v-model="projectProposerName" placeholder="Your answer" id="projectProposerName"/>
+            <input
+              v-model="projectProposerName"
+              placeholder="Your answer"
+              id="projectProposerName"
+            />
           </div>
         </el-card>
       </div>
@@ -267,8 +275,11 @@
             <div class="left-paragraph">Proposer Email Address:</div>
           </div>
           <div class="underline-input">
-            <input v-model="projectProposerEmail" placeholder="Your answer" id="projectProposerEmail"/>
-            
+            <input
+              v-model="projectProposerEmail"
+              placeholder="Your answer"
+              id="projectProposerEmail"
+            />
           </div>
         </el-card>
       </div>
@@ -281,7 +292,11 @@
             </div>
           </div>
           <div class="underline-input">
-            <input v-model= "projectProjectContactName" placeholder="Your answer" id="projectProjectContactName" />
+            <input
+              v-model="projectProjectContactName"
+              placeholder="Your answer"
+              id="projectProjectContactName"
+            />
           </div>
         </el-card>
       </div>
@@ -294,7 +309,7 @@
             </div>
           </div>
           <div class="underline-input">
-            <input placeholder="Your answer" />
+            <input v-model= "projectProjectContactEmail" placeholder="Your answer" id="projectProjectContactEmail"/>
           </div>
         </el-card>
       </div>
@@ -339,7 +354,11 @@
             <div class="left-paragraph">Project Title:</div>
           </div>
           <div class="underline-input">
-            <input v-model ="projectTitle" placeholder="Your answer" id="projectTitle" />
+            <input
+              v-model="projectTitle"
+              placeholder="Your answer"
+              id="projectTitle"
+            />
           </div>
         </el-card>
       </div>
@@ -350,7 +369,11 @@
             <div class="left-paragraph">Project Description:</div>
           </div>
           <div class="underline-input">
-            <input v-model = "projectDescription" placeholder="Your answer" id="projectDescription"/>
+            <input
+              v-model="projectDescription"
+              placeholder="Your answer"
+              id="projectDescription"
+            />
           </div>
         </el-card>
       </div>
@@ -361,7 +384,11 @@
             <div class="left-paragraph">Student Learning Experience:</div>
           </div>
           <div class="underline-input">
-            <input v-model = "projectStudentLearningExperience" placeholder="Your answer" id = "projectStudentLearningExperience" />
+            <input
+              v-model="projectStudentLearningExperience"
+              placeholder="Your answer"
+              id="projectStudentLearningExperience"
+            />
           </div>
         </el-card>
       </div>
@@ -372,7 +399,11 @@
             <div class="left-paragraph">Expected Deliverables:</div>
           </div>
           <div class="underline-input">
-            <input v-model = "projectExpectedDeliverables" placeholder="Your answer" id="projectExpectedDeliverables" />
+            <input
+              v-model="projectExpectedDeliverables"
+              placeholder="Your answer"
+              id="projectExpectedDeliverables"
+            />
           </div>
         </el-card>
       </div>
@@ -383,7 +414,11 @@
             <div class="left-paragraph">Desired Background:</div>
           </div>
           <div class="underline-input">
-            <input v-model = "projectDesiredBackground" placeholder="Your answer" id="projectDesiredBackground"/>
+            <input
+              v-model="projectDesiredBackground"
+              placeholder="Your answer"
+              id="projectDesiredBackground"
+            />
           </div>
         </el-card>
       </div>
@@ -490,7 +525,7 @@
             <div>
               <el-checkbox
                 v-model="checked28"
-                label="No Agreements are required."
+                label="No Agreements are required"
                 size="large"
               />
             </div>
@@ -502,7 +537,7 @@
                 size="large"
               />
             </div>
-            <div>
+            <div class="other-checkbox-container">
               <el-checkbox v-model="checked30" label="Other" size="large" />
               <el-input
                 v-model="otherInput1"
@@ -542,7 +577,11 @@
             </div>
           </div>
           <div class="underline-input">
-            <input placeholder="Your answer" />
+            <input
+              v-model="projectProjectLinks"
+              placeholder="Your answer"
+              id="projectProjectLinks"
+            />
           </div>
         </el-card>
       </div>
@@ -598,8 +637,17 @@ export default {
       checked21: false,
       checked22: false,
       checked23: false,
-      checked24: false
-      
+      checked24: false,
+      checked25: false,
+      checked26: false,
+      checked27: false,
+      checked28: false,
+      checked29: false,
+      checked30: false,
+      otherInput1: "",
+      projectLinks:"",
+      selectedTeamSize: null,
+      projectProjectContactEmail:"",
     };
   },
   methods: {
@@ -610,6 +658,7 @@ export default {
       );
     },
 
+  
     submitData() {
       let selectedCohort = "";
       if (this.checked1) {
@@ -666,13 +715,13 @@ export default {
     //
       let selectedprojectResourcesProvided = "";
       if (this.checked16) {
-        selectedintellectualPropertyConcerns += " Yes ";
+        selectedprojectResourcesProvided += " Yes ";
       }
       if (this.checked17) {
-        selectedintellectualPropertyConcerns += " No ";
+        selectedprojectResourcesProvided += " No ";
       }
       if (this.checked18) {
-        selectedintellectualPropertyConcerns += " No extra resources needed";
+        selectedprojectResourcesProvided += " No extra resources needed";
       }
 
       //
@@ -697,11 +746,34 @@ export default {
       if (this.checked24) {
         selectedProjectFocus += " Interdisciplinary project that may work with majors outside of CS and CSE";
       }
+      //
+      let selectedRequiredAgreements = "";
+      if (this.checked25) {
+        selectedRequiredAgreements +="Non-Disclosure Agreement";
+      }
+      if (this.checked26) {
+        selectedRequiredAgreements += " Intellectual Property Agreement";
+      }
+      if (this.checked27) {
+        selectedRequiredAgreements += " Ability to Obtain US Security Clearance";
+      }
+      if (this.checked28) {
+        selectedRequiredAgreements += " No Agreements are required";
+      }
+      if (this.checked29) {
+        selectedRequiredAgreements += " US Citizenship Required ";
+      }
+      if (this.checked30) {
+        selectedRequiredAgreements += this.otherInput1;
+      }
 
+
+      const currentTimeStamp = new Date();
+      const formattedTimestamp = currentTimeStamp.toISOString();
 
       const projectData = {
         title: this.projectTitle,
-        timestamp: "2023-02-09T13:00:51Z",
+        timestamp: formattedTimestamp,
         cohort: selectedCohort,
         organizationClassification: selectedClassifications,
         intellectualPropertyConcerns: selectedintellectualPropertyConcerns,
@@ -709,16 +781,20 @@ export default {
         dedicatedContact: selecteddedicatedContact,
         proposerOrganization: this.projectProposerOrganization,
         proposerName: this.projectProposerName,
-        // proposerEmail: this.projectProposerEmail
+        proposerEmail: this.projectProposerEmail,
         projectContactName: this.projectProjectContactName,
         description: this.projectDescription,
         studentLearningExperience: this.projectStudentLearningExperience,
         expectedDeliverables: this.projectExpectedDeliverables,
         desiredBackground: this.projectDesiredBackground,
-        projectFocus: selectedProjectFocus
+        projectFocus: selectedProjectFocus,
+        requiredAgreements: selectedRequiredAgreements,
+        projectLinks: this.projectProjectLinks,
+        maxTeamSize: this.selectedTeamSize,
+        projectContactEmail: this.projectProjectContactEmail,
       };
 
-      fetch("http://localhost:8080/addProject", {
+      fetch("http://localhost:8080/addProject",   {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -760,6 +836,16 @@ export default {
           this.checked22 = false;
           this.checked23 = false;
           this.checked24 = false;
+          this.checked25 = false;
+          this.checked26 = false;
+          this.checked27 = false;
+          this.checked28 = false;
+          this.checked29 = false;
+          this.checked30 = false;
+          this.otherInput1 = "";
+
+          
+
         })
         .catch((error) => {
           console.error("Error sending data:", error);
@@ -771,9 +857,6 @@ export default {
 
 <script setup>
 import LandingPage from "../components/LandingPage.vue";
-
-
-
 </script>
 
 <style>
