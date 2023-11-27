@@ -1,5 +1,8 @@
 <template>
   <div class="home-page">
+    <div class="Landing-page">
+      <LandingPage />
+    </div>
     <div class="home-image">
       <el-carousel height="200px" class="demonstration">
         <el-carousel-item v-for="(image, index) in images" :key="index">
@@ -7,81 +10,41 @@
         </el-carousel-item>
       </el-carousel>
     </div>
-    <div class="home-description">
-      <el-text class="home-text" size="large"
-        >The ASU CS and CSE Capstone programs pair Computer Science (CS) and
-        Computer</el-text
-      >
-      <br />
-      <el-text class="home-text" size="large"
-        >Systems Engineering (CSE) students with Industry and Faculty sponsored
-        projects to</el-text
-      >
-      <br />
-      <el-text class="home-text" size="large"
-        >prepare students for the professional world.</el-text
-      >
-      <br />
-      <br />
-      <el-text class="home-text" size="large"
-        >Learn more about our programs by clicking the links below.</el-text
-      >
-    </div>
     <div class="home-body">
       <div class="top-links">
         <div class="link-container">
-          <router-link to="/student" class="link-format">
-            FOR STUDENTS
+          <router-link to="/projectDetail" class="link-format">
+            PROJECT INFO
           </router-link>
           <br />
           <br />
-          <div class="sub-text">
-            Learn about the class and maybe propose a project of your own!
-          </div>
+          <div class="sub-text">Get all projects information.</div>
         </div>
         <div class="link-container">
-          <router-link to="/sponsor" class="link-format">
-            FOR SPONSORS
+          <router-link to="/studentDetail" class="link-format">
+            STUDENT INFO
           </router-link>
           <br />
           <br />
-          <div class="sub-text">
-            Find out more about the program and propose a project to start
-            working with students.
-          </div>
+          <div class="sub-text">Get all students information.</div>
         </div>
       </div>
-      <div class="bottom-links">
+      <div class="top-links">
         <div class="link-container">
-          <router-link to="/Admin" class="link-format">
-            FOR ADMINS
+          <router-link to="/adminDetail" class="link-format">
+            ADMIN INFO
           </router-link>
           <br />
           <br />
-          <div class="sub-text">
-            Administrator-specific pages.
-          </div>
+          <div class="sub-text">Get all administrators information.</div>
         </div>
         <div class="link-container">
-          <router-link to="/Seminars" class="link-format">
-            HOST A SEMINAR
-          </router-link>
+          <button class="link-format" @click="openAssignProjectDialog">
+            ASSIGN PROJECT
+          </button>
           <br />
           <br />
-          <div class="sub-text">
-            Share your knowledge and advice with students that are about to
-            graduate!
-          </div>
-        </div>
-        <div class="link-container">
-          <router-link to="/projectDetail" class="link-format">
-            PROJECT DETAILS
-          </router-link>
-          <br />
-          <br />
-          <div class="sub-text">
-            View information on all projects. Find your favorite projects!  
-          </div>
+          <div class="sub-text">Assign students out to projects.</div>
         </div>
       </div>
     </div>
@@ -93,12 +56,20 @@
 </template>
 
 <script>
-import { ElCarousel, ElCarouselItem } from "element-plus";
+import {
+  ElCarousel,
+  ElCarouselItem,
+  ElMessageBox,
+  ElMessage,
+} from "element-plus";
+import LandingPage from "../components/LandingPage.vue";
+import axios from "axios";
 
 export default {
   components: {
     ElCarousel,
     ElCarouselItem,
+    LandingPage,
   },
   data() {
     return {
@@ -108,6 +79,50 @@ export default {
         { url: require("@/assets/Student_background.jpg"), alt: "Image 3" },
       ],
     };
+  },
+  methods: {
+    async assignProjects() {
+      // Check if there's an adminId in the session storage
+      if (!sessionStorage.getItem("adminId")) {
+        ElMessage.error(
+          "You don't have the permission to view this content. If you are an administrator, please login first."
+        );
+        return;
+      }
+
+      try {
+        const response = await axios.put(
+          "http://localhost:8080/assignProjects"
+        );
+        if (response.status === 200) {
+          ElMessage({
+            message: "Assign successful.",
+            type: "success",
+          });
+        } else {
+          throw new Error();
+        }
+      } catch (error) {
+        ElMessage.error("Something went wrong.");
+      }
+    },
+    openAssignProjectDialog() {
+      ElMessageBox.confirm(
+        "Do you want to Assign students out to projects?",
+        "Assign Projects",
+        {
+          confirmButtonText: "Yes",
+          cancelButtonText: "No",
+          type: "warning",
+        }
+      )
+        .then(() => {
+          this.assignProjects();
+        })
+        .catch(() => {
+          // Handle rejected (cancelled) promise here if needed
+        });
+    },
   },
 };
 </script>
@@ -156,13 +171,6 @@ export default {
   margin-right: 2rem;
 }
 
-.bottom-links {
-  display: flex;
-  gap: 1rem;
-  margin-left: 2rem;
-  margin-right: 2rem;
-}
-
 .link {
   color: white;
   text-decoration: none;
@@ -197,5 +205,11 @@ export default {
   width: 100%;
   height: 200px;
   object-fit: cover;
+}
+.link-format {
+  background: none !important;
+  border: none;
+  padding: 0 !important;
+  text-decoration: underline;
 }
 </style>
