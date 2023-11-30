@@ -266,7 +266,6 @@
           </div>
           <div class="underline-input">
             <input v-model="projectProposerEmail" placeholder="Your answer" id="projectProposerEmail"/>
-            
           </div>
         </el-card>
       </div>

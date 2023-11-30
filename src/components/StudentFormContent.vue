@@ -86,7 +86,7 @@
             <div class="left-paragraph">Proposer Name:</div>
           </div>
           <div class="underline-input">
-            <input placeholder="Your answer" />
+            <input v-model="projectProposerName" placeholder="Your answer" id="projectProposerName"/>
           </div>
         </el-card>
       </div>
@@ -97,7 +97,7 @@
             <div class="left-paragraph">Proposer Email Address:</div>
           </div>
           <div class="underline-input">
-            <input placeholder="Your answer" />
+            <input v-model="projectProposerEmail" placeholder="Your answer" id="projectProposerEmail"/>
           </div>
         </el-card>
       </div>
@@ -108,7 +108,7 @@
             <div class="left-paragraph">Sponsor Contact Name:</div>
           </div>
           <div class="underline-input">
-            <input placeholder="Your answer" />
+            <input v-model ="projectSponsorName" placeholder="Your answer"  id="projectSponsorName"/>
           </div>
         </el-card>
       </div>
@@ -119,7 +119,7 @@
             <div class="left-paragraph">Sponsor Contact Email:</div>
           </div>
           <div class="underline-input">
-            <input placeholder="Your answer" />
+            <input v-model="projectSponsorEmail" placeholder="Your answer" id="projectSponsorEmail"/>
           </div>
         </el-card>
       </div>
@@ -132,11 +132,11 @@
             </div>
           </div>
           <div class="left-paragraph">
-            Please include the FULL NAME of all the students, separated by
+            Please include the ASUriteIds of all the students, separated by
             commas. Include yourself.
           </div>
           <div class="underline-input">
-            <input placeholder="Your answer" />
+            <input v-model="projectProposedTeamAsuriteIds" placeholder="Your answer" id="projectProposedTeamAsuriteIds" />
           </div>
         </el-card>
       </div>
@@ -153,7 +153,7 @@
             semicolons. Include your own email here as well.
           </div>
           <div class="underline-input">
-            <input placeholder="Your answer" />
+            <input v-model="projectProposedTeamEmails" placeholder="Your answer" id="projectProposedTeamEmails"/>
           </div>
         </el-card>
       </div>
@@ -198,7 +198,7 @@
             <div class="left-paragraph">Project Title:</div>
           </div>
           <div class="underline-input">
-            <input placeholder="Your answer" />
+            <input v-model ="projectTitle" placeholder="Your answer" id="projectTitle" />
           </div>
         </el-card>
       </div>
@@ -209,7 +209,7 @@
             <div class="left-paragraph">Project Description:</div>
           </div>
           <div class="underline-input">
-            <input placeholder="Your answer" />
+            <input v-model = "projectDescription" placeholder="Your answer" id="projectDescription"/>
           </div>
         </el-card>
       </div>
@@ -220,7 +220,7 @@
             <div class="left-paragraph">Student Learning Experience:</div>
           </div>
           <div class="underline-input">
-            <input placeholder="Your answer" />
+            <input v-model = "projectStudentLearningExperience" placeholder="Your answer" id = "projectStudentLearningExperience" />
           </div>
         </el-card>
       </div>
@@ -231,7 +231,7 @@
             <div class="left-paragraph">Expected Deliverables:</div>
           </div>
           <div class="underline-input">
-            <input placeholder="Your answer" />
+            <input v-model = "projectExpectedDeliverables" placeholder="Your answer" id="projectExpectedDeliverables" />
           </div>
         </el-card>
       </div>
@@ -242,7 +242,7 @@
             <div class="left-paragraph">Desired Background:</div>
           </div>
           <div class="underline-input">
-            <input placeholder="Your answer" />
+            <input v-model = "projectDesiredBackground" placeholder="Your answer" id="projectDesiredBackground"/>
           </div>
         </el-card>
       </div>
@@ -255,22 +255,28 @@
           <div class="checkbox-group">
             <div>
               <el-checkbox
-                v-model="checked28"
+                v-model="checked21"
                 label="Significant Software Development (for CS students)"
                 size="large"
               />
+            </div>
+            <div>
               <el-checkbox
-                v-model="checked29"
+                v-model="checked22"
                 label="Significant Hardware / Embedded Software Development (for CSE Students)"
                 size="large"
               />
+            </div>
+            <div>
               <el-checkbox
-                v-model="checked29"
+                v-model="checked23"
                 label="Both Significant Software and Embedded Systems Development"
                 size="large"
               />
+            </div>
+            <div>
               <el-checkbox
-                v-model="checked29"
+                v-model="checked24"
                 label="Interdisciplinary project that may work with majors outside of CS and CSE"
                 size="large"
               />
@@ -299,7 +305,7 @@
     </div>
 <!--  -->
     <div class="button" style="margin-top: 20px; display: flex; justify-content: flex-end; width: 925px;">
-        <el-button :color="bg" plain>Submit</el-button>
+        <el-button :color="bg" plain @click="submitData">Submit</el-button>
     </div>
 
 
@@ -310,9 +316,105 @@
 export default {
   data() {
     return {
+      projectProposerName:"",
+      projectProposerEmail:"",
+      projectSponsorName:"",
+      projectSponsorEmail:"",
+      // projectProposedTeamAsuriteIds:"",
+      // projectProposedTeamEmails:"",
+      projectTitle:"",
+      projectDescription:"",
+      projectStudentLearningExperience:"",
+      projectExpectedDeliverables:"",
+      projectDesiredBackground:"",
+      checked21: false,
+      checked22: false,
+      checked23: false,
+      checked24: false,
+      selectedTeamSize: null,
+
+
+
+
+
       color: 'var(--moon-color)', // Set the background color to a CSS variable
     };
   },
+  methods: {
+    switchAccount() {
+      window.open(
+        "https://accounts.google.com/AccountChooser/signinchooser?continue=https%3A%2F%2Fdocs.google.com%2Fforms%2Fd%2Fe%2F1FAIpQLSeXiCKRfBdKgLI0JTBdKE09PHWIVIh8p9suybNX1LdyZD8plg%2Fviewform%3Fembedded%3Dtrue&service=wise&theme=glif&flowName=GlifWebSignIn&flowEntry=AccountChooser",
+        "_blank"
+      );
+    },
+    submitData(){
+
+
+      let selectedProjectFocus = "";
+      if (this.checked21) {
+        selectedProjectFocus += "Significant Software Development (for CS students)";
+      }
+      if (this.checked22) {
+        selectedProjectFocus += " Significant Hardware / Embedded Software Development (for CSE Students)";
+      }
+      if (this.checked23) {
+        selectedProjectFocus += " Both Significant Software and Embedded Systems Development";
+      }
+      if (this.checked24) {
+        selectedProjectFocus += " Interdisciplinary project that may work with majors outside of CS and CSE";
+      }
+
+
+      const projectData = {
+        proposerName: this.projectProposerName,
+        proposerEmail: this.projectProposerEmail,
+        sponsorName: this.projectSponsorName,
+        sponsorEmail: this.projectSponsorEmail,
+        // proposedTeamAsuriteIds: this.projectProposedTeamAsuriteIds,
+        // proposedTeamEmails: this.projectProposedTeamEmails,
+        title: this.projectTitle,
+        description: this.projectDescription,
+        studentLearningExperience: this.projectStudentLearningExperience,
+        expectedDeliverables: this.projectExpectedDeliverables,
+        desiredBackground: this.projectDesiredBackground,
+        projectFocus: selectedProjectFocus,
+        maxTeamSize: this.selectedTeamSize,
+
+        
+      
+
+
+
+      };
+
+      fetch('http://localhost:8080/addProject', {
+        method:'POST',
+        headers:{
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(projectData),
+      })
+      .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("Data sent successfully:", data);
+          this.checked21 = false;
+          this.checked22 = false;
+          this.checked23 = false;
+          this.checked24 = false;
+
+        })
+        .catch((error) => {
+          console.error("Error sending data:", error);
+        });
+      }
+    },
+      
+
 };
 </script>
 
